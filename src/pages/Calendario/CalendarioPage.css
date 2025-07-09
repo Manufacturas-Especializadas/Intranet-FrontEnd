@@ -1,0 +1,39 @@
+@import 'react-big-calendar/lib/sass/styles';
+@import 'react-big-calendar/lib/addons/dragAndDrop/styles';
+
+.modern-calendar .rbc-toolbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.modern-calendar .rbc-toolbar button{
+    @apply bg-gradient-to-r from-blue-500 to-indigo-600 
+        text-white px-4 py-1 rounded-md text-sm font-medium 
+        transition hover:from-blue-600 hover:to-indigo-700
+}
+
+.modern-calendar .rbc-month-view,
+.modern-calendar .rbc-time-view,
+.modern-calendar .rbc-agenda-view{
+    border: none;
+}
+
+.modern-calendar .rbc-header{
+    background: #f3f4f6;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.modern-calendar .rbc-today{
+    background-color: #bfdbfe !important;
+    border-radius: 8px;
+}
+
+.modern-calendar .rbc-event{
+    border-radius: 4px;
+}
