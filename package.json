@@ -13,6 +13,7 @@
     "@tailwindcss/vite": "^4.1.8",
     "aos": "^2.3.4",
     "dayjs": "^1.11.13",
+    "framer-motion": "^12.23.22",
     "react": "^19.1.0",
     "react-big-calendar": "^1.19.2",
     "react-dom": "^19.1.0",
