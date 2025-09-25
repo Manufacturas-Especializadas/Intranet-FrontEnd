@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { 
-    FaBars, 
-    FaHome, 
-    FaNewspaper, 
-    FaTimes, 
+import {
+    FaBars,
+    FaHome,
+    FaNewspaper,
+    FaTimes,
     FaUser,
     FaCalendar,
     FaPhone
@@ -13,8 +13,8 @@ import Logo from "../../assets/logomesa.png";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-    const[isOpen, setOpen] = useState(false);
-    const[isDropdownOpen, setDropdownOpen] = useState(false);
+    const [isOpen, setOpen] = useState(false);
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleNavigate = (path) => {
@@ -27,27 +27,27 @@ const Navbar = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex-shrink-0 flex items-center">
-                            <img 
-                                src={ Logo } 
+                            <img
+                                src={Logo}
                                 alt="logo"
-                                className="h-12 w-auto mr-3" 
+                                className="h-12 w-auto mr-3"
                             />
                         </div>
 
                         <div className="hidden md:flex space-x-6 items-center">
                             <a onClick={() => handleNavigate("/")} className="flex items-center text-white 
                                 hover:text-secondary transition-colors cursor-pointer">
-                                <FaHome className="mr-2"/>
+                                <FaHome className="mr-2" />
                                 <span>Inicio</span>
                             </a>
                             <a onClick={() => handleNavigate("calendario")} className="flex items-center text-white 
                                 hover:text-secondary font-semibold transition-colors cursor-pointer">
-                                <FaCalendar className="mr-2"/>
+                                <FaCalendar className="mr-2" />
                                 <span>Calendario</span>
                             </a>
-                            <a  onClick={() => handleNavigate("directorio")} className="flex items-center text-white
+                            <a onClick={() => handleNavigate("directorio")} className="flex items-center text-white
                                 hover:text-secondary font-semibold transition-colors cursor-pointer">
-                                <FaPhone className="mr-2"/>
+                                <FaPhone className="mr-2" />
                                 <span>Directorio</span>
                             </a>
                             <div
@@ -59,7 +59,7 @@ const Navbar = () => {
                                         transition-colors focus:outline-none"
                                     onMouseEnter={() => setDropdownOpen(true)}
                                 >
-                                    <TbHierarchy className="mr-2"/>
+                                    <TbHierarchy className="mr-2" />
                                     <span>Departamentos</span>
                                 </button>
                                 {
@@ -69,35 +69,35 @@ const Navbar = () => {
                                             onMouseEnter={() => setDropdownOpen(true)}
                                             onMouseLeave={() => setDropdownOpen(false)}
                                         >
-                                            <a 
+                                            <a
                                                 onClick={() => handleNavigate("rh")}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 
                                                 hover:text-secondary cursor-pointer"
                                             >
                                                 Recursos Humanos
                                             </a>
-                                            <a 
+                                            <a
                                                 onClick={() => handleNavigate("capacitacion")}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 
                                                 hover:text-secondary cursor-pointer"
                                             >
                                                 Capacitación
                                             </a>
-                                            <a 
+                                            <a
                                                 onClick={() => handleNavigate("calidad")}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 
                                                 hover:text-secondary cursor-pointer"
                                             >
                                                 Calidad
                                             </a>
-                                            <a 
+                                            <a
                                                 onClick={() => handleNavigate("manufactura")}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 
                                                 hover:text-secondary cursor-pointer"
                                             >
                                                 Manufactura
                                             </a>
-                                            <a 
+                                            <a
                                                 onClick={() => handleNavigate("EH&S")}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 
                                                 hover:text-secondary cursor-pointer"
@@ -108,23 +108,23 @@ const Navbar = () => {
                                     )
                                 }
                             </div>
-                            <a 
-                                onClick={() => handleNavigate("perfil")} 
+                            <a
+                                onClick={() => handleNavigate("perfil")}
                                 className="flex items-center text-white 
                                 hover:text-secondary font-semibold transition-colors
                                 cursor-pointer">
-                                <FaUser className="mr-2"/>
+                                <FaUser className="mr-2" />
                                 <span>Perfil</span>
                             </a>
                         </div>
 
                         <div className="md:hidden flex items-center">
                             <button
-                                onClick={ () => setOpen(!isOpen) }
+                                onClick={() => setOpen(!isOpen)}
                                 className="text-white focus:outline-none p-2 rounded cursor-pointer
                                 transition-colors hover:bg-gray-300"
                             >
-                                { isOpen ? <FaTimes size={ 24 }/> : <FaBars size={ 24 }/> }
+                                {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
                             </button>
                         </div>
                     </div>
@@ -134,29 +134,29 @@ const Navbar = () => {
                     isOpen && (
                         <div className="md:hidden bg-white shadow-lg">
                             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                                <a  
-                                    onClick={() => handleNavigate("/")} 
+                                <a
+                                    onClick={() => handleNavigate("/")}
                                     className="flex items-center px-3 py-2 
                                     rounded-md text-gray-600 hover:bg-gray-100 cursor-pointer"
                                 >
-                                    <FaHome className="mr-2"/>
+                                    <FaHome className="mr-2" />
                                     Inicio
                                 </a>
-                                <a 
+                                <a
                                     onClick={() => handleNavigate("calendario")}
                                     className="flex items-center px-3 py-2
                                     rounded-md text-gray-600 hover:bg-gray-100 cursor-pointer"
                                 >
-                                    <FaCalendar className="mr-2"/>
+                                    <FaCalendar className="mr-2" />
                                     Calendario
                                 </a>
-                                <a 
+                                <a
                                     onClick={() => handleNavigate("directorio")}
                                     className="flex items-center px-3 py-2
                                     rounded-md text-gray-600 hover:bg-gray-100 cursor-pointer"
                                 >
-                                    <FaPhone className="mr-2"/>
-                                    Directorio    
+                                    <FaPhone className="mr-2" />
+                                    Directorio
                                 </a>
                                 <div className="relative">
                                     <button
@@ -165,7 +165,7 @@ const Navbar = () => {
                                         rounded-md text-gray-600 hover:bg-gray-100 cursor-pointer"
                                     >
                                         <span className="flex items-center">
-                                            <TbHierarchy className="mr-2"/>
+                                            <TbHierarchy className="mr-2" />
                                             Departamentos
                                         </span>
                                         <svg
@@ -185,33 +185,33 @@ const Navbar = () => {
                                     {
                                         isDropdownOpen && (
                                             <div className="pl-6 space-y-1">
-                                                <a 
+                                                <a
                                                     onClick={() => handleNavigate("rh")}
                                                     className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                 >
                                                     Recursos Humanos
                                                 </a>
-                                                <a 
+                                                <a
                                                     onClick={() => handleNavigate("capacitacion")}
-                                                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"                                                    
+                                                    className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                 >
                                                     Capacitación
                                                 </a>
-                                                <a 
+                                                <a
                                                     onClick={() => handleNavigate("calidad")}
                                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 
                                                     hover:text-secondary cursor-pointer"
                                                 >
                                                     Calidad
                                                 </a>
-                                                <a 
+                                                <a
                                                     onClick={() => handleNavigate("manufactura")}
                                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 
                                                     hover:text-secondary cursor-pointer"
                                                 >
                                                     Manufactura
                                                 </a>
-                                                <a 
+                                                <a
                                                     onClick={() => handleNavigate("EH&S")}
                                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 
                                                     hover:text-secondary cursor-pointer"
@@ -222,12 +222,12 @@ const Navbar = () => {
                                         )
                                     }
                                 </div>
-                                <a 
+                                <a
                                     onClick={() => handleNavigate("perfil")}
                                     className="flex items-center px-3 py-2
                                     rounded-md text-gray-600 hover:bg-gray-100"
                                 >
-                                    <FaUser className="mr-2"/>
+                                    <FaUser className="mr-2" />
                                     Perfil
                                 </a>
                             </div>
