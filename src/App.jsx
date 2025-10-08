@@ -12,6 +12,7 @@ import PerfilPage from "./pages/Perfil/PerfilPage";
 import Calidad from "./pages/Calidad/Calidad";
 import Manufactura from "./pages/Manufactura/Manufactura";
 import Seguridad from "./pages/Seguridad/Seguridad";
+import Register from "./components/Auth/Register";
 
 const App = () => {
   useEffect(() => {
@@ -26,16 +27,18 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout/>}>
-          <Route index element={<Home/>}/>
-          <Route path="calendario" element={<CalendarioPage/>}/>
-          <Route path="directorio" element={<DirectorioPage/>}/>
-          <Route path="rh" element={<RhPage/>}/>
-          <Route path="capacitacion" element={<CapacitacionPage/>}/>
-          <Route path="calidad" element={<Calidad/>}/>
-          <Route path="manufactura" element={<Manufactura/>}/>
-          <Route path="EH&S" element={<Seguridad/>}/>
-          <Route path="perfil" element={<PerfilPage/>}/>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="calendario" element={<CalendarioPage />} />
+          <Route path="directorio" element={<DirectorioPage />} />
+          <Route path="rh" element={<RhPage />} />
+          <Route path="capacitacion" element={<CapacitacionPage />} />
+          <Route path="calidad" element={<Calidad />} />
+          <Route path="manufactura" element={<Manufactura />} />
+          <Route path="EH&S" element={<Seguridad />} />
+          <Route path="perfil" element={<PerfilPage />} />
+
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </BrowserRouter>
