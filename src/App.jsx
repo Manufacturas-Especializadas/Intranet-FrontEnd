@@ -8,13 +8,14 @@ import "aos/dist/aos.css";
 import DirectorioPage from "./pages/Directorio/DirectorioPage";
 import RhPage from "./pages/RH/RhPage";
 import CapacitacionPage from "./pages/Capacitacion/CapacitacionPage";
-import PerfilPage from "./pages/Perfil/PerfilPage";
+import { PerfilPage } from "./pages/Perfil/PerfilPage";
 import Calidad from "./pages/Calidad/Calidad";
 import Manufactura from "./pages/Manufactura/Manufactura";
 import Seguridad from "./pages/Seguridad/Seguridad";
 import Register from "./components/Auth/Register";
 import { AuthProvider } from "./context/AuthContext";
 import { Login } from "./components/Auth/Login";
+import { DetalleNoticia } from "./components/DetalleNoticia/DetalleNoticia";
 
 const App = () => {
   useEffect(() => {
@@ -41,6 +42,7 @@ const App = () => {
             <Route path="EH&S" element={<Seguridad />} />
             <Route path="perfil" element={<PerfilPage />} />
 
+            <Route path="/noticia/:id" element={<DetalleNoticia />} />
             <Route path="/register" element={<Register />} />
 
             <Route path="/login" element={<Login />} />
