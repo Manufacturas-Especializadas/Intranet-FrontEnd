@@ -17,6 +17,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { Login } from "./components/Auth/Login";
 import { DetalleNoticia } from "./components/DetalleNoticia/DetalleNoticia";
 import { NoticiasForm } from "./components/Noticias/NoticiasForm/NoticiasForm";
+import { FeaturedCollaboratorsForm } from "./components/FeaturedCollaboratorsForm/FeaturedCollaboratorsForm";
 
 const App = () => {
   useEffect(() => {
@@ -42,6 +43,8 @@ const App = () => {
             <Route path="manufactura" element={<Manufactura />} />
             <Route path="EH&S" element={<Seguridad />} />
             <Route path="perfil" element={<PerfilPage />} />
+
+            <Route path="/formulario-colaborador" element={<FeaturedCollaboratorsForm />} />
 
             <Route path="/noticia/:id" element={<DetalleNoticia />} />
             <Route path="/nueva-noticia" element={<NoticiasForm />} />
