@@ -3,9 +3,6 @@ import axios from "axios";
 const httpClient = axios.create({
     baseURL: import.meta.env.VITE_API_URL || "https://localhost:44362/api",
     timeout: 30000,
-    headers: {
-        "Content-Type": "application/json",
-    },
 });
 
 httpClient.interceptors.request.use(
