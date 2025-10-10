@@ -1,119 +1,112 @@
-import { 
-    FaFacebook,
-    FaInstagram, 
-    FaLinkedin, 
-    FaLocationArrow, 
-    FaMobileAlt 
-} from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaFacebook, FaInstagram, FaLinkedin, FaLocationArrow, FaMobileAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/logomesa.png";
 
+const footerData = {
+    about: {
+        logo: Logo,
+        name: "Manufacturas Especializadas",
+        description: "Comprometidos con la excelencia operativa y la mejora continua, impulsamos el desarrollo y la innovación en cada proceso.",
+    },
+    contact: [
+        {
+            icon: FaLocationArrow,
+            text: "Carretera a Villa de García 3850, Santa Catarina, N.L México C.P.66350",
+        },
+        {
+            icon: FaMobileAlt,
+            text: "(81) 8850-2500",
+        },
+    ],
+    socials: [
+        { icon: FaInstagram, url: "#" },
+        { icon: FaFacebook, url: "#" },
+        { icon: FaLinkedin, url: "#" },
+    ],
+    linkGroups: [
+        {
+            title: "Links Importantes",
+            links: [
+                { text: "Inicio", path: "/" },
+                { text: "Calendario", path: "/calendario" },
+                { text: "Directorio", path: "/directorio" },
+                { text: "Perfil", path: "/perfil" },
+            ],
+        },
+        {
+            title: "Departamentos",
+            links: [
+                { text: "Recursos Humanos", path: "/rh" },
+                { text: "Capacitación", path: "/capacitacion" },
+                { text: "Calidad", path: "/calidad" },
+                { text: "Manufactura", path: "/manufactura" },
+                { text: "EH&S", path: "/EH&S" },
+            ],
+        },
+    ],
+    copyright: `© ${new Date().getFullYear()} Manufacturas Especializadas S.A. Todos los derechos reservados.`
+};
+
 const Footer = () => {
-    const navigate = useNavigate();
-
-    const handleNavigate = (path) => {
-        navigate(path);
-    };
-
     return (
-        <>
-            <div data-aos="fade-up" className="bg-gray-300">
-                <section className="max-w-[1200px] mx-auto">
-                    <div className="grid md:grid-cols-3 py-5">
+        <footer className="bg-slate-200">
+            <div className="container mx-auto px-4">
+                <div className="grid md:grid-cols-3 gap-8 py-12">
 
-                        <div className="py-8 px-4">
-                            <h1 className="sm:text-3xl text-xl font-bold sm:text-left
-                                text-justify mb-3 flex items-center gap-3">
-                                <img src={ Logo } alt="Logo" className="w-16"/>
-                                Manufacturas Especializadas
-                            </h1>
-                            <p>
-                                Comprometidos con la excelencia operativa y la mejora continua, 
-                                en Manufacturas Especializadas impulsamos el desarrollo de nuestros 
-                                colaboradores y la innovación en cada uno de nuestros procesos.
-                            </p>
-                            <br />
-                            <div className="flex items-center gap-3">
-                                <FaLocationArrow size={ 33 }/>
-                                <p>
-                                    Manufacturas Especializadas S.A.
-                                    Carretera a Villa de García 3850
-                                    Santa Catarina, N.L México C.P.66350
-                                </p>
-                            </div>
-                            <div className="flex items-center gap-3 mt-3">
-                                <FaMobileAlt size={ 25 }/>
-                                <p>(81) 8850-2500</p>
-                            </div>
-
-                            <div className="flex items-center gap-3 mt-6">
-                                <a href="">
-                                    <FaInstagram className="text-3xl"/>
-                                </a>
-                                <a href="">
-                                    <FaFacebook className="text-3xl"/>
-                                </a>
-                                <a href="">
-                                    <FaLinkedin className="text-3xl"/>
-                                </a>
-                            </div>
+                    <div className="space-y-6">
+                        <div className="flex items-center gap-3">
+                            <img src={footerData.about.logo} alt="Logo" className="w-16" />
+                            <h2 className="text-2xl font-bold text-slate-800">{footerData.about.name}</h2>
                         </div>
-
-                        <div className="grid grid-cols-2 sm:grid-cols-3 col-span-2 md:pl-10">
-                            <div>
-                                <div className="py-8 px-4">
-                                    <h2 className="sm:text-xl text-xl font-bold sm:text-left text-justify mb-3">
-                                        Links importantes
-                                    </h2>
-
-                                    <ul className="flex flex-col gap-3">
-                                        <li className="hover:cursor-pointer hover:text-primary" onClick={() => handleNavigate("/")}>
-                                            Incio
-                                        </li>
-                                        <li className="hover:cursor-pointer hover:text-primary" onClick={() => handleNavigate("/calendario")}>
-                                            Calendario
-                                        </li>
-                                        <li className="hover:cursor-pointer hover:text-primary" onClick={() => handleNavigate("/directorio")}>
-                                            Directorio
-                                        </li>
-                                        <li className="hover:cursor-pointer hover:text-primary" onClick={() => handleNavigate("/perfil")}>
-                                            Perfil
-                                        </li>
-                                    </ul>
-                                </div>
+                        <p className="text-sm leading-relaxed">{footerData.about.description}</p>
+                        {footerData.contact.map((item, index) => (
+                            <div key={index} className="flex items-start gap-3">
+                                <item.icon className="text-xl mt-1 text-[#00B0F5]" />
+                                <p className="text-sm">{item.text}</p>
                             </div>
-
-                            <div>
-                                <div className="py-8 px-4">
-                                    <h2 className="sm:text-xl font-bold sm:text-left text-justify mb-3">
-                                        Departamentos
-                                    </h2>
-
-                                    <ul className="flex flex-col gap-3">
-                                        <li className="hover:cursor-pointer hover:text-primary" onClick={() => handleNavigate("/rh")}>
-                                            Recursos Humanos
-                                        </li>
-                                        <li className="hover:cursor-pointer hover:text-primary" onClick={() => handleNavigate("/capacitacion")}>
-                                            Capacitación
-                                        </li>
-                                        <li className="hover:cursor-pointer hover:text-primary" onClick={() => handleNavigate("/calidad")}>
-                                            Calidad
-                                        </li>
-                                        <li className="hover:cursor-pointer hover:text-primary" onClick={() => handleNavigate("/manufactura")}>
-                                            Manufactura
-                                        </li>
-                                        <li className="hover:cursor-pointer hover:text-primary" onClick={() => handleNavigate("/EH&S")}>
-                                            EH&S y Responsabilidad Social
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
-                </section>
-            </div>
-        </>
-    )
-}
 
-export default Footer
+                    <div className="md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-8">
+                        {footerData.linkGroups.map((group) => (
+                            <div key={group.title}>
+                                <h3 className="text-xl font-bold text-slate-800 mb-4">{group.title}</h3>
+                                <ul className="space-y-3">
+                                    {group.links.map((link) => (
+                                        <li key={link.text}>
+                                            <Link
+                                                to={link.path}
+                                                className="hover:text-[#00B0F5] hover:pl-2 transition-all duration-300"
+                                            >
+                                                {link.text}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row justify-between items-center py-6 border-t border-slate-300">
+                    <p className="text-sm text-slate-500">{footerData.copyright}</p>
+                    <div className="flex items-center gap-4 mt-4 sm:mt-0">
+                        {footerData.socials.map((social, index) => (
+                            <a
+                                key={index}
+                                href={social.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-2xl text-slate-500 hover:text-[#00B0F5] hover:scale-110 transition-all duration-300"
+                            >
+                                <social.icon />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;
