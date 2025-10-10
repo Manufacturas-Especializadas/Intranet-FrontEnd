@@ -16,6 +16,7 @@ import Register from "./components/Auth/Register";
 import { AuthProvider } from "./context/AuthContext";
 import { Login } from "./components/Auth/Login";
 import { DetalleNoticia } from "./components/DetalleNoticia/DetalleNoticia";
+import { NoticiasForm } from "./components/Noticias/NoticiasForm/NoticiasForm";
 
 const App = () => {
   useEffect(() => {
@@ -43,6 +44,8 @@ const App = () => {
             <Route path="perfil" element={<PerfilPage />} />
 
             <Route path="/noticia/:id" element={<DetalleNoticia />} />
+            <Route path="/nueva-noticia" element={<NoticiasForm />} />
+
             <Route path="/register" element={<Register />} />
 
             <Route path="/login" element={<Login />} />
