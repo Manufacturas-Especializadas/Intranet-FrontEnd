@@ -1,53 +1,68 @@
 import { useNavigate, useParams } from "react-router-dom";
-import Img1 from "../../assets/imgNoticias/img1.jfif";
-import Img2 from "../../assets/imgNoticias/img2.jfif";
-import Img3 from "../../assets/imgNoticias/img3.jfif";
-import { Box, Typography, Button, Container, Paper } from "@mui/material";
+import { useEffect, useState } from "react";
+import internalNewService from "../../api/services/internalNewService";
+import {
+    Box,
+    Button,
+    Container,
+    Paper,
+    Typography,
+    CircularProgress,
+} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-
-const noticiasData = [
-    {
-        id: 1,
-        img: Img1,
-        name: "Nueva Plataforma de Innovación Interna",
-        description:
-            "Se lanza una nueva herramienta digital para fomentar ideas innovadoras entre los colaboradores.",
-        content:
-            "Esta nueva plataforma busca conectar el talento interno con los retos estratégicos de la empresa. A través de una interfaz intuitiva, los colaboradores podrán proponer soluciones, votar ideas y hacer seguimiento de los avances de cada iniciativa.",
-    },
-    {
-        id: 2,
-        img: Img2,
-        name: "Refuerzo de Normas y Buenas Prácticas",
-        description:
-            "Se implementan nuevas capacitaciones sobre disciplina organizacional.",
-        content:
-            "Con el objetivo de garantizar la calidad y seguridad en nuestras operaciones, se han programado nuevos cursos y talleres enfocados en buenas prácticas laborales, liderazgo responsable y comunicación efectiva.",
-    },
-    {
-        id: 3,
-        img: Img3,
-        name: "Éxito del Taller de Trabajo en Equipo",
-        description:
-            "El reciente taller sobre trabajo colaborativo reunió a más de 100 participantes.",
-        content:
-            "El taller dejó valiosas lecciones sobre cómo fomentar un ambiente laboral más empático y colaborativo. Los asistentes compartieron experiencias y estrategias que ayudarán a fortalecer los equipos de trabajo.",
-    },
-];
 
 export const DetalleNoticia = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const noticia = noticiasData.find((n) => n.id === Number(id));
+    const [internalNews, setInternalNews] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
-    if (!noticia) {
+    useEffect(() => {
+        const fetchInternalNews = async () => {
+            try {
+                setLoading(true);
+                const reponse = await internalNewService.getInternalNewById(id);
+                setInternalNews(reponse.data);
+                setError(false);
+            } catch (error) {
+                console.error("Error al cargar la noticia");
+                setError(true);
+                setInternalNews(null)
+            } finally {
+                setLoading(false);
+            }
+        };
+        if (id) {
+            fetchInternalNews();
+        }
+    }, [id]);
+
+    if (loading) {
         return (
-            <Box textAlign="center" mt={10}>
-                <Typography variant="h5">Noticia no encontrada</Typography>
-                <Button onClick={() => navigate(-1)} sx={{ mt: 2 }} variant="contained">
+            <Container sx={{ py: 8, textAlign: "center" }}>
+                <CircularProgress />
+                <Typography variant="h6" sx={{ mt: 2 }}>
+                    Cargando noticia...
+                </Typography>
+            </Container>
+        );
+    }
+
+    if (error || !internalNews) {
+        return (
+            <Container sx={{ py: 8, textAlign: "center" }}>
+                <Typography variant="h5" color="error">
+                    No se pudo cargar la noticia
+                </Typography>
+                <Button
+                    onClick={() => navigate(-1)}
+                    variant="contained"
+                    sx={{ mt: 2 }}
+                >
                     Volver
                 </Button>
-            </Box>
+            </Container>
         );
     }
 
@@ -71,7 +86,7 @@ export const DetalleNoticia = () => {
                     borderRadius: 4,
                     overflow: "hidden",
                     background: "linear-gradient(135deg, #f5f7fa 0%, #e0ecff 100%)",
-                    p: { xs: 0, sm: 2 }, // ⚠️ Eliminamos padding exterior para evitar desbordamiento
+                    p: { xs: 0, sm: 2 },
                 }}
             >
                 <Box
@@ -81,10 +96,9 @@ export const DetalleNoticia = () => {
                         minHeight: { xs: "auto", sm: 400 },
                         width: "100%",
                         gap: 2,
-                        p: { xs: 2, sm: 3 }, // Padding interno para separar contenido de los bordes
+                        p: { xs: 2, sm: 3 },
                     }}
                 >
-                    {/* Imagen */}
                     <Box
                         sx={{
                             flex: { xs: "0 0 100%", sm: "0 0 50%" },
@@ -96,8 +110,8 @@ export const DetalleNoticia = () => {
                     >
                         <Box
                             component="img"
-                            src={noticia.img}
-                            alt={noticia.name}
+                            src={internalNews.img}
+                            alt={internalNews.title}
                             sx={{
                                 width: "100%",
                                 height: "100%",
@@ -107,7 +121,6 @@ export const DetalleNoticia = () => {
                         />
                     </Box>
 
-                    {/* Texto */}
                     <Box
                         sx={{
                             flex: { xs: "0 0 100%", sm: "0 0 50%" },
@@ -126,7 +139,7 @@ export const DetalleNoticia = () => {
                                 mb: 2,
                             }}
                         >
-                            {noticia.name}
+                            {internalNews.title}
                         </Typography>
 
                         <Typography
@@ -138,7 +151,7 @@ export const DetalleNoticia = () => {
                                 wordBreak: "break-word",
                             }}
                         >
-                            {noticia.content}
+                            {internalNews.description}
                         </Typography>
                     </Box>
                 </Box>
