@@ -7,5 +7,9 @@ export const API_ENDPOINTS = {
         REGISTER: "/InternalNew/CreateInternalNew",
         GETINTERNALNEWS: "/InternalNew/GetInternalNews",
         GETINTERNALNEWSBYID: "/InternalNew/GetInternalNewsById/"
+    },
+    FEATUREDCOLLABORATORS: {
+        REGISTER: "/FeaturedCollaborators/CreateFeaturedCollaborators",
+        GETCOLLABORATOR: "/FeaturedCollaborators/GetCollaborators"
     }
 };
