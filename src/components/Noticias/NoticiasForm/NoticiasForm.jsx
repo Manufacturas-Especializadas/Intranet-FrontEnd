@@ -120,7 +120,7 @@ export const NoticiasForm = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
                                 Descripción
                             </label>
                             <textarea
@@ -166,7 +166,7 @@ export const NoticiasForm = () => {
                         <div className="p-4">
                             <button
                                 type="submit"
-                                disabled={!formData.title || !formData.description || !formData.img}
+                                disabled={!formData.title || !formData.description}
                                 className={`w-full py-2 px-4 rounded-lg font-medium text-white transition-all
                                         ${formData.title && formData.description && formData.img
                                         ? "bg-indigo-600 hover:bg-indigo-700"
@@ -174,7 +174,7 @@ export const NoticiasForm = () => {
                                     }
                                     hover:cursor-pointer`}
                             >
-                                Guardar
+                                {isSubmitting ? "Guardando..." : "Guardar"}
                             </button>
                         </div>
                     </form>
