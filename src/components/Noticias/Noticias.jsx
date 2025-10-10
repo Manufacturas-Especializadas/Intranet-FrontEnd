@@ -1,82 +1,64 @@
 import HeaderTitle from "../HeaderTitle/HeaderTitle";
-import Img1 from "../../assets/imgNoticias/img1.jfif";
-import Img2 from "../../assets/imgNoticias/img2.jfif";
-import Img3 from "../../assets/imgNoticias/img3.jfif";
 import { Link } from "react-router-dom";
-
-const noticiasData = [
-    {
-        id: 1,
-        img: Img1,
-        name: "Nueva Plataforma de Innovación Interna",
-        description:
-            "Se lanza una nueva herramienta digital para fomentar ideas innovadoras entre los colaboradores. El sistema permitirá registrar, evaluar y dar seguimiento a propuestas de mejora en tiempo real.",
-        aosDelay: "100"
-    },
-    {
-        id: 2,
-        img: Img2,
-        name: "Refuerzo de Normas y Buenas Prácticas",
-        description:
-            "Se implementan nuevas capacitaciones sobre disciplina organizacional. Estas acciones buscan fortalecer la cultura del cumplimiento y la excelencia en los procesos internos.",
-        aosDelay: "300"
-    },
-    {
-        id: 3,
-        img: Img3,
-        name: "Éxito del Taller de Trabajo en Equipo",
-        description:
-            "El reciente taller sobre trabajo colaborativo reunió a más de 100 participantes de distintas áreas. Se destacaron dinámicas para mejorar la comunicación, la confianza y la resolución de conflictos.",
-        aosDelay: "500"
-    }
-];
-
+import { useEffect, useState } from "react";
+import internalNewService from "../../api/services/internalNewService";
+import { FaRegNewspaper } from 'react-icons/fa';
 
 const Noticias = () => {
+    const [internalNews, setInternalNews] = useState([]);
+
+    useEffect(() => {
+        const loadInternalNews = async () => {
+            try {
+                const response = await internalNewService.getInernalNews();
+                setInternalNews(response.data);
+            } catch (error) {
+                console.error("Error al obtener los datos: ", error);
+            }
+        }
+        loadInternalNews();
+    }, []);
+
     return (
         <>
             <div className="bg-gray-100">
-                <div className="py-12 lg:py-20">
-                    <div className="container">
+                <div className="py-8 lg:py-10">
+                    <div className="container mx-auto px-4">
                         <HeaderTitle
                             title="Noticias internas"
                             subtitle="Las noticias más relevantes de la semana"
-                            description={
-                                "Aquí encontrarás los últimos anuncios, actualizaciones y novedades importantes dentro de nuestra organización. Mantente informado y al día con lo que sucede en MESA"
-                            }
+                            description="Aquí encontrarás los últimos anuncios, actualizaciones y novedades dentro de MESA. Para ver los detalles, solo tienes que hacer clic en la noticia que te interese."
                         />
-                        <div className="grid grid-cols-1 sm:grid-cols-2 
-                            md:grid-cols-3 gap-14 md:gap-5 place-items-center">
-                            {
-                                noticiasData.map((item) => (
+
+                        <div className="flex flex-wrap justify-center gap-8">
+                            {internalNews.length > 0 ? (
+                                internalNews.map((item) => (
                                     <Link
                                         key={item.id}
                                         to={`/noticia/${item.id}`}
-                                        data-aos="fade-up"
-                                        data-aos-delay={item.aosDelay}
-                                        className="rounded-2xl bg-white hover:bg-primary 
-                                        hover:text-white relative shadow-xl duration-300 group max-w-[300px] 
-                                        block transform hover:-translate-y-1 transition-transform"
+                                        className="flex flex-col w-64 bg-white rounded-2xl border-4 border-white overflow-hidden text-gray-600 shadow-xl cursor-pointer transition-transform duration-200 ease-in-out hover:scale-110"
                                     >
-                                        <div className="h-[100px]">
-                                            <img
-                                                src={item.img}
-                                                alt={item.name}
-                                                className="max-w-[150px] block mx-auto transform -translate-y-16
-                                                group-hover:scale-105 duration-300 p-2"
-                                            />
+                                        <div
+                                            className="h-52 w-full grid place-items-center text-white bg-gradient-to-bl from-[#00B0F5] to-[#0081C9] [border-radius:100%_0%_100%_0%_/_0%_50%_50%_100%]"
+                                        >
+                                            <FaRegNewspaper size={72} />
                                         </div>
-                                        <div className="p-4 text-center">
-                                            <h1 className="text-xl font-bold">{item.name}</h1>
-                                            <p
-                                                className="text-gray-500 group-hover:text-white 
-                                                duration-300 text-sm line-clamp-2"
-                                            >
-                                                {item.description}
-                                            </p>
+
+                                        <div className="flex flex-col items-center flex-grow p-4">
+                                            <h1 className="text-center uppercase font-bold text-base mb-2 truncate w-full">{item.title}</h1>
+                                            <p className="text-center text-xs text-gray-500 mb-3 line-clamp-3">{item.description}</p>
+
+                                            <div className="mt-auto rounded-full py-1.5 px-8 text-white uppercase text-sm bg-gradient-to-l from-[#00B0F5] to-[#0081C9]">
+                                                Ver más
+                                            </div>
                                         </div>
                                     </Link>
-                                ))}
+                                ))
+                            ) : (
+                                <div className="col-span-full text-center py-10">
+                                    <p className="text-gray-500 text-lg">No hay noticias disponibles.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
