@@ -30,8 +30,9 @@ const todosLosFormularios = {
     },
     usuarios: {
         id: 'usuarios',
-        title: 'Gestionar Usuarios',
-        description: 'Administra cuentas de empleados.',
+        title: 'Colaborador destacado',
+        description: 'Agrega un nuevo colaborador',
+        path: "/formulario-colaborador"
     },
     tickets: {
         id: 'tickets',
