@@ -14,12 +14,14 @@ import {
 } from "@mui/icons-material";
 
 import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const todosLosFormularios = {
     noticias: {
         id: 'noticias',
         title: 'Publicar Noticia',
         description: 'Crea una entrada para el blog interno.',
+        path: "/nueva-noticia"
     },
     proyectos: {
         id: 'proyectos',
@@ -49,7 +51,7 @@ const formConfig = {
     noticias: {
         icon: <ArticleIcon fontSize="large" />,
         color: "#3b82f6",
-        bgColor: "#eff6ff"
+        bgColor: "#eff6ff",
     },
     proyectos: {
         icon: <BusinessIcon fontSize="large" />,
@@ -70,7 +72,6 @@ const formConfig = {
 
 export const PerfilPage = () => {
     const { currentUser, loading } = useAuth();
-    console.log(currentUser);
 
     if (loading) {
         return <div className="p-6">Cargando...</div>;
@@ -103,75 +104,80 @@ export const PerfilPage = () => {
                             };
 
                             return (
-                                <Grid item xs={12} sm={6} md={4} key={form.id}>
-                                    <Card
-                                        elevation={0}
-                                        sx={{
-                                            borderRadius: 3,
-                                            height: '100%',
-                                            transition: 'all 0.3s ease',
-                                            '&:hover': {
-                                                transform: 'translateY(-4px)',
-                                                boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)',
-                                            },
-                                            border: '1px solid',
-                                            borderColor: 'divider',
-                                        }}
-                                    >
-                                        <CardActionArea
+
+                                <Link
+                                    to={form.path}
+                                >
+                                    <Grid item xs={12} sm={6} md={4} key={form.id}>
+                                        <Card
+                                            elevation={0}
                                             sx={{
-                                                height: '100%',
-                                                p: 3,
-                                                bgcolor: config.bgColor,
                                                 borderRadius: 3,
-                                                display: 'flex',
-                                                flexDirection: 'column',
+                                                height: '100%',
+                                                transition: 'all 0.3s ease',
+                                                '&:hover': {
+                                                    transform: 'translateY(-4px)',
+                                                    boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)',
+                                                },
+                                                border: '1px solid',
+                                                borderColor: 'divider',
                                             }}
                                         >
-                                            <CardContent
+                                            <CardActionArea
                                                 sx={{
-                                                    p: 0,
-                                                    flex: 1,
+                                                    height: '100%',
+                                                    p: 3,
+                                                    bgcolor: config.bgColor,
+                                                    borderRadius: 3,
                                                     display: 'flex',
                                                     flexDirection: 'column',
-                                                    justifyContent: 'space-between',
                                                 }}
                                             >
-                                                <Box
+                                                <CardContent
                                                     sx={{
-                                                        width: 56,
-                                                        height: 56,
-                                                        borderRadius: '50%',
-                                                        bgcolor: config.color,
+                                                        p: 0,
+                                                        flex: 1,
                                                         display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        mb: 2,
-                                                        color: 'white',
+                                                        flexDirection: 'column',
+                                                        justifyContent: 'space-between',
                                                     }}
                                                 >
-                                                    {config.icon}
-                                                </Box>
+                                                    <Box
+                                                        sx={{
+                                                            width: 56,
+                                                            height: 56,
+                                                            borderRadius: '50%',
+                                                            bgcolor: config.color,
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            mb: 2,
+                                                            color: 'white',
+                                                        }}
+                                                    >
+                                                        {config.icon}
+                                                    </Box>
 
-                                                <Typography
-                                                    variant="h6"
-                                                    fontWeight="bold"
-                                                    sx={{ color: config.color, mb: 1 }}
-                                                >
-                                                    {form.title}
-                                                </Typography>
+                                                    <Typography
+                                                        variant="h6"
+                                                        fontWeight="bold"
+                                                        sx={{ color: config.color, mb: 1, textTransform: "uppercase" }}
+                                                    >
+                                                        {form.title}
+                                                    </Typography>
 
-                                                <Typography
-                                                    variant="body2"
-                                                    color="text.secondary"
-                                                    sx={{ lineHeight: 1.5, flex: 1 }}
-                                                >
-                                                    {form.description}
-                                                </Typography>
-                                            </CardContent>
-                                        </CardActionArea>
-                                    </Card>
-                                </Grid>
+                                                    <Typography
+                                                        variant="body2"
+                                                        color="text.secondary"
+                                                        sx={{ lineHeight: 1.5, flex: 1 }}
+                                                    >
+                                                        {form.description}
+                                                    </Typography>
+                                                </CardContent>
+                                            </CardActionArea>
+                                        </Card>
+                                    </Grid>
+                                </Link>
                             );
                         })}
                     </Grid>
