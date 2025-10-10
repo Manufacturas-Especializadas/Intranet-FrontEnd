@@ -1,5 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import heroCalendario from "../../assets/heroCalendario.jfif";
+import { BsCalendarCheck, BsClipboardData, BsPeople } from "react-icons/bs";
+import { FaArrowRight } from "react-icons/fa6";
+
+const calendarContent = {
+    title: "Calendario MESA",
+    subtitle: "Tu guía central para eventos y plazos clave. Organiza tu participación y mantente siempre al día.",
+    features: [
+        {
+            icon: BsCalendarCheck,
+            text: "Encuentros y capacitaciones",
+        },
+        {
+            icon: BsClipboardData,
+            text: "Revisiones de avance y entregas",
+        },
+        {
+            icon: BsPeople,
+            text: "Sesiones de equipo y eventos",
+        },
+    ],
+    buttonText: "Ver calendario completo",
+};
 
 const Calendario = () => {
     const navigate = useNavigate();
@@ -8,64 +30,74 @@ const Calendario = () => {
         navigate(path);
     };
 
-    return(
+    return (
         <>
-            <section className="min-h-[550px] bg-gray-100">
-                <div className="min-h-[550px] flex justify-center
-                    items-center backdrop-blur-xl py-12 sm:py-0">
-                    <div className="contianer">
-                        <div className="grid grid-cols-1
-                            sm:grid-cols-2 gap-6">
-                                {/* image section */}
-                            <div>
-                                <img 
-                                    src={ heroCalendario } 
-                                    alt="calendario"
-                                    className="max-w-[430px] w-full mx-auto
-                                        drop-shadow-[-10px_10_12px_rgba(0,0,0,1)]"
-                                />
-                            </div>
+            <section className="min-h-[550px] flex items-center bg-gray-100 py-12 sm:py-0">
+                <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-                            {/* text conten section */}
-                            <div className="flex flex-col 
-                                justify-center gap-6 sm:pt-0">
-                                <h1 
-                                    data-aos="fade-up"
-                                    className="text-3xl sm:text-4xl font-bold">
-                                    Calendario MESA
-                                </h1>
-                                <p
-                                    data-aos="fade-up"
-                                    className="text-sm text-gray-500 
-                                    tracking-wide leading-5"
-                                >
-                                    Consulta todas las fechas clave relacionadas con las actividades de la MESA. 
-                                    Encuentros, capacitaciones, revisiones de avance y otras sesiones importantes 
-                                    están organizadas para facilitar tu planificación y participación activa.
-                                    <br />
-                                    <br />
-                                    Este calendario está diseñado para mantener a todos los miembros informados y 
-                                    alineados con los objetivos del equipo. Revísalo frecuentemente para estar al tanto 
-                                    de cualquier actualización o cambio en la programación.
-                                </p>
-                                <div data-aos="fade-up" data-aos-delay="500">
-                                    <button
-                                        className="bg-gradient-to-r from-primary
-                                            to-secondary text-white py-2 px-4
-                                            rounded-full shadow-xl hover:shadow-md
-                                            cursor-pointer"
-                                            onClick={() => handleNavigate("calendario")}
+                        <div className="order-2 md:order-1">
+                            <img
+                                src={heroCalendario}
+                                alt="calendario"
+                                className="w-full max-w-md mx-auto rounded-lg shadow-2xl 
+                                        transform -rotate-3 transition-all duration-300 
+                                        hover:rotate-0 hover:scale-105"
+                            />
+                        </div>
+
+                        <div className="order-1 md:order-2 flex flex-col justify-center space-y-6">
+                            <h1
+                                className="text-4xl sm:text-5xl font-bold text-gray-800 leading-tight"
+                                style={{ animation: "fadeInUp 0.5s ease-out" }}
+                            >
+                                {calendarContent.title}
+                            </h1>
+                            <p
+                                className="text-lg text-gray-600"
+                                style={{ animation: "fadeInUp 0.5s ease-out 0.2s forwards", opacity: 0 }}
+                            >
+                                {calendarContent.subtitle}
+                            </p>
+
+                            <ul className="space-y-4 pt-2">
+                                {calendarContent.features.map((feature, index) => (
+                                    <li
+                                        key={index}
+                                        className="flex items-center text-gray-700"
+                                        style={{ animation: `fadeInUp 0.5s ease-out ${0.4 + index * 0.1}s forwards`, opacity: 0 }}
                                     >
-                                        Ver calendario
-                                    </button>
-                                </div>
+                                        <feature.icon className="text-xl text-blue-500 mr-3" />
+                                        <span>{feature.text}</span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <div style={{ animation: "fadeInUp 0.5s ease-out 0.8s forwards", opacity: 0 }}>
+                                <button
+                                    className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white 
+                                            font-semibold py-3 px-6 rounded-full shadow-lg transform
+                                            hover:scale-105 hover:brightness-110 hover:shadow-xl transition-all duration-300 hover:cursor-pointer"
+                                    onClick={() => handleNavigate("calendario")}
+                                >
+                                    {calendarContent.buttonText}
+                                    <FaArrowRight />
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+            <style>
+                {`
+                    @keyframes fadeInUp {
+                        from { opacity: 0; transform: translateY(20px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                `}
+            </style>
         </>
-    )
-}
+    );
+};
 
-export default Calendario
+export default Calendario;
