@@ -11,5 +11,10 @@ export const API_ENDPOINTS = {
     FEATUREDCOLLABORATORS: {
         REGISTER: "/FeaturedCollaborators/CreateFeaturedCollaborators",
         GETCOLLABORATOR: "/FeaturedCollaborators/GetCollaborators"
+    },
+    BLOGCONTENT: {
+        GETBLOGCONTENT: "/BlogContent/GetBlogContent",
+        REGISTER: "/BlogContent/Register",
+        DELETE: "/BlogContent/Delete/"
     }
 };

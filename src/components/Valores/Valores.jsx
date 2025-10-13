@@ -64,7 +64,7 @@ const valoresData = [
 
 const Valores = () => {
     return (
-        <section className="py-10 lg:py-20 bg-slate-50">
+        <section className="py-2 lg:py-20 bg-slate-50">
             <div className="container mx-auto px-4">
                 <HeaderTitle
                     title="Valores MESA"
