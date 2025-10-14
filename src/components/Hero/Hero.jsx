@@ -58,7 +58,7 @@ const Hero = () => {
                             {heroContent.subtitle}
                         </p>
 
-                        <div className="pt-4">
+                        {/* <div className="pt-4">
                             <button
                                 className="flex items-center gap-3 bg-gradient-to-r from-[#00B0F5] to-[#044fa9] text-white
                                             font-bold py-3 px-8 rounded-full shadow-lg transform
@@ -67,7 +67,7 @@ const Hero = () => {
                                 {heroContent.ctaButton}
                                 <FaArrowRight />
                             </button>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="hidden md:flex justify-center items-center h-[500px]">
