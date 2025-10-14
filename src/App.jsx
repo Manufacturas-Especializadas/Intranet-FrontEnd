@@ -18,6 +18,7 @@ import { Login } from "./components/Auth/Login";
 import { DetalleNoticia } from "./components/DetalleNoticia/DetalleNoticia";
 import { NoticiasForm } from "./components/Noticias/NoticiasForm/NoticiasForm";
 import { FeaturedCollaboratorsForm } from "./components/FeaturedCollaboratorsForm/FeaturedCollaboratorsForm";
+import { TI } from "./pages/TI/TI";
 
 const App = () => {
   useEffect(() => {
@@ -43,6 +44,8 @@ const App = () => {
             <Route path="manufactura" element={<Manufactura />} />
             <Route path="EH&S" element={<Seguridad />} />
             <Route path="perfil" element={<PerfilPage />} />
+
+            <Route path="/TI" element={<TI />} />
 
             <Route path="/formulario-colaborador" element={<FeaturedCollaboratorsForm />} />
 
