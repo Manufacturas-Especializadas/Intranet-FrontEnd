@@ -79,7 +79,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <div onClick={() => handleNavigate("/")} className="flex-shrink-0 flex items-center cursor-pointer">
                         <img src={Logo} alt="logo" className="h-10 w-auto" />
-                        <span className="ml-3 text-xl font-bold text-white">Intranet MESA</span>
+                        <span className="ml-3 text-xl font-bold text-white">Intranet</span>
                     </div>
 
                     <div className="hidden md:flex items-center space-x-2">
