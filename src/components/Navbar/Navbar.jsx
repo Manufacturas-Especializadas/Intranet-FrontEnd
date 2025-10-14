@@ -16,10 +16,10 @@ const navLinks = [
         icon: TbHierarchy,
         submenu: [
             { text: "Recursos Humanos", path: "/rh" },
-            { text: "Capacitación", path: "/capacitacion" },
+            // { text: "Capacitación", path: "/capacitacion" },
             { text: "Calidad", path: "/calidad" },
-            { text: "Manufactura", path: "/manufactura" },
-            { text: "EH&S y Responsabilidad Social", path: "/EH&S" },
+            // { text: "Manufactura", path: "/manufactura" },
+            // { text: "EH&S y Responsabilidad Social", path: "/EH&S" },
         ],
     },
 ];
