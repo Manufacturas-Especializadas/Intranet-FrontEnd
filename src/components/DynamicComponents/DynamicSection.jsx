@@ -7,7 +7,7 @@ export const DynamicSection = ({ id, title, subTitle, description, content, imag
         return (
             <section className="min-h-[550px] flex items-center bg-gray-100 py-12 sm:py-0 relative">
 
-                <RoleGuard allowedRoles={["Admin"]}>
+                <RoleGuard allowedRoles={["Admin", "Recursos humanos", "Calidad", "TI", "Manufactura", "A&T"]}>
                     <button
                         onClick={() => onDelete(id)}
                         className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full
