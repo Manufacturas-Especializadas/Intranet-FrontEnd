@@ -1,7 +1,8 @@
 export const API_ENDPOINTS = {
     AUTH: {
         REGISTER: "/Auth/Register",
-        LOGIN: "/Auth/Login"
+        LOGIN: "/Auth/Login",
+        LOGOUT: "/Auth/Logout"
     },
     INTERNALNEWS: {
         REGISTER: "/InternalNew/CreateInternalNew",

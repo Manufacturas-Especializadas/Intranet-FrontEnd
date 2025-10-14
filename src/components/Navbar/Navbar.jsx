@@ -5,6 +5,7 @@ import {
     FaBars, FaHome, FaTimes, FaUser, FaCalendar, FaPhone, FaChevronDown
 } from "react-icons/fa";
 import { TbHierarchy } from "react-icons/tb";
+import { useAuth } from "../../context/AuthContext";
 
 const navLinks = [
     { text: "Inicio", path: "/", icon: FaHome },
@@ -19,6 +20,7 @@ const navLinks = [
             { text: "Calidad", path: "/calidad" },
             { text: "Manufactura", path: "/manufactura" },
             { text: "EH&S y Responsabilidad Social", path: "/EH&S" },
+            { text: "TI", path: "/TI" }
         ],
     },
 ];
@@ -30,6 +32,8 @@ const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dropdownRef = useRef(null);
+
+    const { isAuthenticated, logout } = useAuth();
 
     useEffect(() => {
         setMobileMenuOpen(false);
@@ -79,7 +83,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <div onClick={() => handleNavigate("/")} className="flex-shrink-0 flex items-center cursor-pointer">
                         <img src={Logo} alt="logo" className="h-10 w-auto" />
-                        <span className="ml-3 text-xl font-bold text-white">Intranet MESA</span>
+                        <span className="ml-3 text-xl font-bold text-white">Intranet</span>
                     </div>
 
                     <div className="hidden md:flex items-center space-x-2">
@@ -109,7 +113,28 @@ const Navbar = () => {
                                 <NavLink key={link.text} item={link} />
                             )
                         )}
-                        <NavLink item={{ text: "Perfil", path: "/perfil", icon: FaUser }} />
+                        {
+                            isAuthenticated ? (
+                                <>
+                                    <NavLink item={{ text: "Perfil", path: "/perfil", icon: FaUser }} />
+                                    <button
+                                        onClick={logout}
+                                        className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-white 
+                                        hover:bg-white/20 hover:cursor-pointer"
+                                    >
+                                        Cerrar sesión
+                                    </button>
+                                </>
+                            ) : (
+                                <button
+                                    onClick={() => navigate("/login")}
+                                    className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-white
+                                    hover:bg-white/20 hover:cursor-pointer"
+                                >
+                                    Iniciar sesión
+                                </button>
+                            )
+                        }
                     </div>
 
                     <div className="md:hidden flex items-center">
@@ -157,7 +182,32 @@ const Navbar = () => {
                             style={{ transitionDelay: `${100 + navLinks.length * 50}ms` }}
                         >
                             <div className="border-t border-white/20 my-2"></div>
-                            <NavLink item={{ text: "Perfil", path: "/perfil", icon: FaUser }} isMobile={true} />
+
+                            {/* 👇 Botones de autenticación en mobile */}
+                            {isAuthenticated ? (
+                                <>
+                                    <NavLink item={{ text: "Perfil", path: "/perfil", icon: FaUser }} isMobile={true} />
+                                    <button
+                                        onClick={() => {
+                                            logout();
+                                            setMobileMenuOpen(false);
+                                        }}
+                                        className="flex items-center w-full px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10"
+                                    >
+                                        Cerrar sesión
+                                    </button>
+                                </>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        navigate("/login");
+                                        setMobileMenuOpen(false);
+                                    }}
+                                    className="flex items-center w-full px-3 py-2 rounded-md text-base font-medium text-white hover:bg-white/10"
+                                >
+                                    Iniciar sesión
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

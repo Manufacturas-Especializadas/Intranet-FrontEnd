@@ -4,6 +4,7 @@ import Hero from "../../components/RhComponents/Hero/Hero"
 import { DynamicSection } from "../../components/DynamicComponents/DynamicSection";
 import { AddSectionButton } from "../../components/DynamicComponents/AddSectionButton";
 import { AddSectionModal } from "../../components/DynamicComponents/AddSectionModal";
+import { RoleGuard } from "../../components/RoleGuard/RoleGuard";
 import blogContentService from "../../api/services/blogContentService";
 import Swal from "sweetalert2";
 
@@ -13,7 +14,7 @@ const RhPage = () => {
 
     const getBlobContent = async () => {
         try {
-            const response = await blogContentService.blogContent();
+            const response = await blogContentService.blogContent("Rh");
             setSections(response.data);
         } catch (error) {
             console.error("Error al obtener la data", error);
@@ -72,12 +73,15 @@ const RhPage = () => {
                 }
             </main>
 
-            <AddSectionButton onClick={() => setIsModalOpen(true)} />
+            <RoleGuard allowedRoles={["Admin", "Recursos humanos"]}>
+                <AddSectionButton onClick={() => setIsModalOpen(true)} />
+            </RoleGuard>
 
             <AddSectionModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onAdd={handleSectionAdded}
+                pageType="Rh"
             />
         </>
     )

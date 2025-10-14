@@ -1,18 +1,21 @@
 import HeaderTitle from "../HeaderTitle/HeaderTitle";
 import { FaBullhorn, FaTrash } from "react-icons/fa";
+import { RoleGuard } from "../RoleGuard/RoleGuard";
 
 export const DynamicSection = ({ id, title, subTitle, description, content, imageUrl, template, onDelete }) => {
     if (template === "imagen" && imageUrl) {
         return (
             <section className="min-h-[550px] flex items-center bg-gray-100 py-12 sm:py-0 relative">
 
-                <button
-                    onClick={() => onDelete(id)}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full
-                    z-20 hover:cursor-pointer"
-                >
-                    <FaTrash size={20} />
-                </button>
+                <RoleGuard allowedRoles={["Admin"]}>
+                    <button
+                        onClick={() => onDelete(id)}
+                        className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full
+                        z-20 hover:cursor-pointer"
+                    >
+                        <FaTrash size={20} />
+                    </button>
+                </RoleGuard>
                 <div className="contianer mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div className="order-2 md:order-1">
