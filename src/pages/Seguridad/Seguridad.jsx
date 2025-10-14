@@ -1,4 +1,5 @@
 import Hero from "../../components/SeguridadComponentes/Hero/Hero";
+import Swal from "sweetalert2";
 import blogContentService from "../../api/services/blogContentService";
 import { useEffect, useState } from "react";
 import { DynamicSection } from "../../components/DynamicComponents/DynamicSection";
