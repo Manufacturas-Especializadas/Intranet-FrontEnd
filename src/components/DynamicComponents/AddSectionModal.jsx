@@ -3,7 +3,7 @@ import { FaFileAlt, FaImage, FaTimes } from "react-icons/fa";
 import Swal from "sweetalert2";
 import blogContentService from "../../api/services/blogContentService";
 
-export const AddSectionModal = ({ isOpen, onClose }) => {
+export const AddSectionModal = ({ isOpen, onClose, pageType }) => {
     const [step, setStep] = useState(1);
     const [template, setTemplate] = useState("");
     const [formData, setFormData] = useState({
@@ -69,6 +69,7 @@ export const AddSectionModal = ({ isOpen, onClose }) => {
         payLoad.append("description", formData.description);
         payLoad.append("content", formData.content);
         payLoad.append("template", template);
+        payLoad.append("pageType", pageType);
 
         if (formData.img) {
             payLoad.append("img", formData.img);
@@ -82,6 +83,8 @@ export const AddSectionModal = ({ isOpen, onClose }) => {
                 didOpen: () => {
                     Swal.showLoading();
                 }
+            }).then(() => {
+                onClose();
             });
 
             await blogContentService.register(payLoad);
