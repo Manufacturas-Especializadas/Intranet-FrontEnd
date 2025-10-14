@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaIdCard, FaUser, FaLock, FaUserTag, FaBuilding } from "react-icons/fa";
 import Swal from "sweetalert2";
-import authService from "../../api/services/authService.JS";
+import authService from "../../api/services/authService";
 
 const Register = () => {
     const [formData, setFormData] = useState({
