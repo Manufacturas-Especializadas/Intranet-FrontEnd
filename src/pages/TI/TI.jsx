@@ -70,7 +70,7 @@ export const TI = () => {
                 }
             </main >
 
-            <RoleGuard allowedRoles={["Admin", "Recursos humanos", "Capacitación"]}>
+            <RoleGuard allowedRoles={["Admin", "TI"]}>
                 <AddSectionButton onClick={() => setIsModalOpen(true)} />
             </RoleGuard>
 
