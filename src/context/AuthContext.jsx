@@ -57,9 +57,9 @@ export const AuthProvider = ({ children }) => {
     const login = async (payRollNumber, password) => {
         try {
             const response = await authService.login({ payRollNumber, password });
-            const { accessToken } = response.data;
-
+            const { accessToken, refreshToken } = response.data;
             localStorage.setItem("authToken", accessToken);
+            localStorage.setItem("refreshToken", refreshToken);
 
             const decoded = parseJwt(accessToken);
             if (!decoded) throw new Error("Token inválido");
