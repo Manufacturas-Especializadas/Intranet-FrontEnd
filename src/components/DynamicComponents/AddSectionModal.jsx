@@ -3,7 +3,7 @@ import { FaFileAlt, FaImage, FaTimes } from "react-icons/fa";
 import Swal from "sweetalert2";
 import blogContentService from "../../api/services/blogContentService";
 
-export const AddSectionModal = ({ isOpen, onClose, pageType }) => {
+export const AddSectionModal = ({ isOpen, onClose, onAdd, pageType }) => {
     const [step, setStep] = useState(1);
     const [template, setTemplate] = useState("");
     const [formData, setFormData] = useState({
@@ -97,6 +97,7 @@ export const AddSectionModal = ({ isOpen, onClose, pageType }) => {
                 icon: "success",
                 confirmButtonText: "Aceptar"
             }).then(() => {
+                onAdd();
                 setFormData({ title: "", subTitle: "", description: "", content: "", img: null });
             })
         } catch (error) {
