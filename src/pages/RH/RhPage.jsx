@@ -14,7 +14,7 @@ const RhPage = () => {
 
     const getBlobContent = async () => {
         try {
-            const response = await blogContentService.blogContent();
+            const response = await blogContentService.blogContent("Rh");
             setSections(response.data);
         } catch (error) {
             console.error("Error al obtener la data", error);
@@ -73,7 +73,7 @@ const RhPage = () => {
                 }
             </main>
 
-            <RoleGuard allowedRoles={["Admin"]}>
+            <RoleGuard allowedRoles={["Admin", "Recursos humanos"]}>
                 <AddSectionButton onClick={() => setIsModalOpen(true)} />
             </RoleGuard>
 
@@ -81,6 +81,7 @@ const RhPage = () => {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onAdd={handleSectionAdded}
+                pageType="Rh"
             />
         </>
     )
