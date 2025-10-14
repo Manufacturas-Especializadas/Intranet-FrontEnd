@@ -4,6 +4,7 @@ import Hero from "../../components/RhComponents/Hero/Hero"
 import { DynamicSection } from "../../components/DynamicComponents/DynamicSection";
 import { AddSectionButton } from "../../components/DynamicComponents/AddSectionButton";
 import { AddSectionModal } from "../../components/DynamicComponents/AddSectionModal";
+import { RoleGuard } from "../../components/RoleGuard/RoleGuard";
 import blogContentService from "../../api/services/blogContentService";
 import Swal from "sweetalert2";
 
@@ -72,7 +73,9 @@ const RhPage = () => {
                 }
             </main>
 
-            <AddSectionButton onClick={() => setIsModalOpen(true)} />
+            <RoleGuard allowedRoles={["Admin"]}>
+                <AddSectionButton onClick={() => setIsModalOpen(true)} />
+            </RoleGuard>
 
             <AddSectionModal
                 isOpen={isModalOpen}
