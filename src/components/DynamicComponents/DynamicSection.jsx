@@ -44,6 +44,45 @@ export const DynamicSection = ({ id, title, subTitle, description, content, imag
         )
     }
 
+    if (template === "video" && imageUrl) {
+        return (
+            <section className="min-h-[550px] flex items-center bg-gray-100 py-12 sm:py-0 relative">
+                <RoleGuard allowedRoles={["Admin", "Recursos humanos", "Calidad", "TI", "Manufactura", "A&T"]}>
+                    <button
+                        onClick={() => onDelete(id)}
+                        className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full z-20 hover:cursor-pointer"
+                    >
+                        <FaTrash size={20} />
+                    </button>
+                </RoleGuard>
+                <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div className="order-2 md:order-1 flex justify-center">
+                            <video
+                                controls
+                                src={imageUrl}
+                                className="w-full max-w-md mx-auto rounded-lg shadow-2xl transform"
+                                poster=""
+                            >
+                                Tu navegador no soporta la reproducción de videos.
+                            </video>
+                        </div>
+                        <div className="order-1 md:order-2 flex flex-col justify-center space-y-6">
+                            <HeaderTitle
+                                title={title}
+                                subtitle={subTitle}
+                                description={description}
+                            />
+                            <p className="text-[17px] mt-3 text-gray-600 whitespace-pre-wrap leading-relaxed">
+                                {content}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section>
             <div className="max-w-full mx-auto">

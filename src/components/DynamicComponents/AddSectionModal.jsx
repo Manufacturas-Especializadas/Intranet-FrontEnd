@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaFileAlt, FaImage, FaTimes } from "react-icons/fa";
+import { FaFileAlt, FaImage, FaVideo, FaTimes } from "react-icons/fa";
 import Swal from "sweetalert2";
 import blogContentService from "../../api/services/blogContentService";
 
@@ -22,7 +22,7 @@ export const AddSectionModal = ({ isOpen, onClose, onAdd, pageType }) => {
             setTimeout(() => {
                 setStep(1);
                 setTemplate("");
-                setFormData({ title: "", content: "", imageUrl: "" });
+                setFormData({ title: "", subTitle: "", description: "", content: "", img: null });
             }, 300);
         }
     }, [isOpen]);
@@ -37,7 +37,7 @@ export const AddSectionModal = ({ isOpen, onClose, onAdd, pageType }) => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleImageChange = (e) => {
+    const handleFileChange = (e) => {
         const file = e.target.files[0];
 
         if (file) {
@@ -63,6 +63,28 @@ export const AddSectionModal = ({ isOpen, onClose, onAdd, pageType }) => {
             return;
         }
 
+        if (template === "imagen" && !formData.img) {
+            Swal.fire({
+                title: "Falta la imagen",
+                text: "Debes seleccionar una imagen para esta plantilla",
+                icon: "warning",
+                confirmButtonText: "Aceptar"
+            });
+            setIsSubmitting(false);
+            return;
+        }
+
+        if (template === "video" && !formData.img) {
+            Swal.fire({
+                title: "Falta el video",
+                text: "Debes seleccionar un video para esta plantilla",
+                icon: "warning",
+                confirmButtonText: "Aceptar"
+            });
+            setIsSubmitting(false);
+            return;
+        }
+
         const payLoad = new FormData();
         payLoad.append("title", formData.title);
         payLoad.append("subTitle", formData.subTitle);
@@ -73,8 +95,6 @@ export const AddSectionModal = ({ isOpen, onClose, onAdd, pageType }) => {
 
         if (formData.img) {
             payLoad.append("img", formData.img);
-        } else {
-            payLoad.append("img", "");
         }
 
         try {
@@ -119,11 +139,15 @@ export const AddSectionModal = ({ isOpen, onClose, onAdd, pageType }) => {
 
     if (!isOpen) return null;
 
+    const fileAccept = template === "video"
+        ? "video/*"
+        : template === "imagen"
+            ? "image/*"
+            : "";
+
     return (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 
-                transition-opacity duration-300">
-            <div className="bg-white rounded-lg shadow-2xl w-full max-w-lg transform transition-all 
-                    duration-300 scale-100 p-6 relative">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 transition-opacity duration-300">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-lg transform transition-all duration-300 scale-100 p-6 relative">
                 <button
                     onClick={onClose}
                     className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 hover:cursor-pointer"
@@ -131,135 +155,131 @@ export const AddSectionModal = ({ isOpen, onClose, onAdd, pageType }) => {
                     <FaTimes size={20} />
                 </button>
 
-                {
-                    step === 1 && (
-                        <div className="text-center">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-6 uppercase">
-                                Elige una plantilla
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div
-                                    onClick={() => handleTemplateSelect("imagen")}
-                                    className="p-6 border-2 border-gray-200 rounded-lg hover:border-indigo-500
-                                        hover:bg-indigo-50 cursor-pointer transition-all"
-                                >
-                                    <FaImage className="mx-auto text-blue-500 mb-3" size={40} />
-                                    <h3 className="font-semibold text-lg text-gray-700">Texto con imagen</h3>
-                                </div>
-                                <div
-                                    onClick={() => handleTemplateSelect("text")}
-                                    className="p-6 border-2 border-gray-200 rounded-lg hover:border-indigo-500
-                                        hover:bg-indigo-50 cursor-pointer transition-all"
-                                >
-                                    <FaFileAlt className="mx-auto text-indigo-500 mb-3" size={40} />
-                                    <h3 className="font-semibold text-lg text-gray-700">Solo texto</h3>
-                                </div>
+                {step === 1 && (
+                    <div className="text-center">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-6 uppercase">
+                            Elige una plantilla
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div
+                                onClick={() => handleTemplateSelect("text")}
+                                className="p-5 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 cursor-pointer transition-all"
+                            >
+                                <FaFileAlt className="mx-auto text-indigo-500 mb-3" size={36} />
+                                <h3 className="font-semibold text-sm text-gray-700">Solo texto</h3>
+                            </div>
+
+                            <div
+                                onClick={() => handleTemplateSelect("imagen")}
+                                className="p-5 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 cursor-pointer transition-all"
+                            >
+                                <FaImage className="mx-auto text-blue-500 mb-3" size={36} />
+                                <h3 className="font-semibold text-sm text-gray-700">Texto con imagen</h3>
+                            </div>
+
+                            <div
+                                onClick={() => handleTemplateSelect("video")}
+                                className="p-5 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 cursor-pointer transition-all"
+                            >
+                                <FaVideo className="mx-auto text-blue-500 mb-3" size={36} />
+                                <h3 className="font-semibold text-sm text-gray-700">Texto con video</h3>
                             </div>
                         </div>
-                    )
-                }
+                    </div>
+                )}
 
-                {
-                    step === 2 && (
-                        <div>
-                            <h2 className="text-2xl font-bold text-gray-800 mb-6 uppercase">
-                                Crear nueva sección
-                            </h2>
+                {step === 2 && (
+                    <div>
+                        <h2 className="text-2xl font-bold text-gray-800 mb-6 uppercase">
+                            Crear nueva sección
+                        </h2>
 
-                            <form onSubmit={handleSubmit} className="space-y-4">
-                                <input
-                                    type="text"
-                                    name="title"
-                                    placeholder="Titulo"
-                                    value={formData.title}
-                                    onChange={handleChange}
-                                    className="w-full border border-gray-300 rounded-lg py-2 px-3 
-                                        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 
-                                        transition-all duration-200 shadow-sm resize-none"
-                                    required
-                                />
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <input
+                                type="text"
+                                name="title"
+                                placeholder="Título"
+                                value={formData.title}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 shadow-sm"
+                                required
+                            />
 
-                                <input
-                                    type="text"
-                                    name="subTitle"
-                                    placeholder="Subtitulo (opcional)"
-                                    value={formData.subTitle}
-                                    onChange={handleChange}
-                                    className="w-full border border-gray-300 rounded-lg py-2 px-3 
-                                        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 
-                                        transition-all duration-200 shadow-sm resize-none"
-                                />
+                            <input
+                                type="text"
+                                name="subTitle"
+                                placeholder="Subtítulo (opcional)"
+                                value={formData.subTitle}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 shadow-sm"
+                            />
 
-                                <input
-                                    type="text"
-                                    name="description"
-                                    placeholder="Descripión de tema (opcional)"
-                                    value={formData.description}
-                                    onChange={handleChange}
-                                    className="w-full border border-gray-300 rounded-lg py-2 px-3 
-                                        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 
-                                        transition-all duration-200 shadow-sm resize-none"
-                                />
+                            <input
+                                type="text"
+                                name="description"
+                                placeholder="Descripción del tema (opcional)"
+                                value={formData.description}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 shadow-sm"
+                            />
 
-                                <textarea
-                                    name="content"
-                                    placeholder="Escribe tu contenido..."
-                                    value={formData.content}
-                                    onChange={handleChange}
-                                    className="w-full border border-gray-300 rounded-lg py-2 px-3 
-                                        focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 
-                                        transition-all duration-200 shadow-sm resize-none"
-                                    required
-                                    rows={5}
-                                />
-                                {
-                                    template === "imagen" && (
-                                        <>
-                                            <input
-                                                type="file"
-                                                id="img"
-                                                name="img"
-                                                accept="image/*"
-                                                onChange={handleImageChange}
-                                                className="hidden"
-                                            />
-                                            <label htmlFor="img" className="flex items-center justify-center w-full px-4 py-2 border
-                                                border-gray-300 rounded-lg cursor-pointer bg-white hover:bg-gray-50 transition-colors
-                                                text-sm font-medium text-gray-700 shadow-sm">
-                                                {
-                                                    formData.img ? (
-                                                        <span className="truncate">{formData.img.name}</span>
-                                                    ) : (
-                                                        <span>seleccionar imagen</span>
-                                                    )
-                                                }
-                                            </label>
-                                        </>
+                            <textarea
+                                name="content"
+                                placeholder="Escribe tu contenido..."
+                                value={formData.content}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 shadow-sm"
+                                required
+                                rows={5}
+                            />
 
-                                    )
-                                }
-
-                                <div className="flex justify-end space-x-3">
-                                    <button
-                                        onClick={() => setStep(1)}
-                                        className="px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 
-                                            uppercase hover:cursor-pointer"
+                            {(template === "imagen" || template === "video") && (
+                                <>
+                                    <input
+                                        type="file"
+                                        id="mediaFile"
+                                        name="img"
+                                        accept={fileAccept}
+                                        onChange={handleFileChange}
+                                        className="hidden"
+                                    />
+                                    <label
+                                        htmlFor="mediaFile"
+                                        className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 rounded-lg cursor-pointer bg-white hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700 shadow-sm"
                                     >
-                                        Atrás
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700
-                                            uppercase hover:cursor-pointer"
-                                    >
-                                        {isSubmitting ? "Guardando..." : "Guardar"}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    )
-                }
+                                        {formData.img ? (
+                                            <span className="truncate">{formData.img.name}</span>
+                                        ) : template === "imagen" ? (
+                                            <span>Seleccionar imagen</span>
+                                        ) : (
+                                            <span>Seleccionar video</span>
+                                        )}
+                                    </label>
+                                </>
+                            )}
+
+                            <div className="flex justify-end space-x-3">
+                                <button
+                                    type="button"
+                                    onClick={() => setStep(1)}
+                                    className="px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 uppercase
+                                    hover:cursor-pointer"
+                                >
+                                    Atrás
+                                </button>
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 uppercase 
+                                    disabled:opacity-70 hover:cursor-pointer"
+                                >
+                                    {isSubmitting ? "Guardando..." : "Guardar"}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                )}
             </div>
         </div>
-    )
-}
+    );
+};
