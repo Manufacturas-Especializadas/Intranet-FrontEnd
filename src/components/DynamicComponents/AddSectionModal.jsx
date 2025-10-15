@@ -73,6 +73,8 @@ export const AddSectionModal = ({ isOpen, onClose, onAdd, pageType }) => {
 
         if (formData.img) {
             payLoad.append("img", formData.img);
+        } else {
+            payLoad.append("img", "");
         }
 
         try {
