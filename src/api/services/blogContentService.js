@@ -6,7 +6,13 @@ const blogContentService = {
     blogContent: (pageType) => {
         return httpClient.get(`${API_ENDPOINTS.BLOGCONTENT.GETBLOGCONTENT}?pageType=${encodeURIComponent(pageType)}`);
     },
+    blogContenById: (id, pageType) => {
+        return httpClient.get(`${API_ENDPOINTS.BLOGCONTENT.GETBLOGCONTENTBYID}${id}?pageType=${encodeURIComponent(pageType)}`);
+    },
     register: (formData) => httpClient.post(API_ENDPOINTS.BLOGCONTENT.REGISTER, formData),
+    update: (id, formData) => {
+        return httpClient.put(`${API_ENDPOINTS.BLOGCONTENT.UPDATE}${id}`, formData);
+    },
     delete: (id) => httpClient.delete(`${API_ENDPOINTS.BLOGCONTENT.DELETE}${id}`)
 }
 
