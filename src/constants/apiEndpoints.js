@@ -15,7 +15,9 @@ export const API_ENDPOINTS = {
     },
     BLOGCONTENT: {
         GETBLOGCONTENT: "/BlogContent/GetBlogContent",
+        GETBLOGCONTENTBYID: "/BlogContent/GetBlogContentById/",
         REGISTER: "/BlogContent/Register",
+        UPDATE: "/BlogContent/Edit/",
         DELETE: "/BlogContent/Delete/"
     }
 };
