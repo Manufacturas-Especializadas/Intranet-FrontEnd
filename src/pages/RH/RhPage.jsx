@@ -5,12 +5,15 @@ import { DynamicSection } from "../../components/DynamicComponents/DynamicSectio
 import { AddSectionButton } from "../../components/DynamicComponents/AddSectionButton";
 import { AddSectionModal } from "../../components/DynamicComponents/AddSectionModal";
 import { RoleGuard } from "../../components/RoleGuard/RoleGuard";
+import { EditSectionModal } from "../../components/DynamicComponents/EditSectionModal";
 import blogContentService from "../../api/services/blogContentService";
 import Swal from "sweetalert2";
 
 const RhPage = () => {
     const [sections, setSections] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [editingId, setEditingId] = useState(null);
 
     const getBlobContent = async () => {
         try {
@@ -29,6 +32,18 @@ const RhPage = () => {
         setIsModalOpen(false);
         getBlobContent();
     };
+
+    const handleEditSection = (id) => {
+        console.log("Editando contenido con ID:", id);
+        setEditingId(id);
+        setIsEditModalOpen(true);
+    };
+
+    const handleSectionEdited = () => {
+        setIsEditModalOpen(false);
+        getBlobContent();
+    };
+
 
     const handleDeleteSection = async (id) => {
         Swal.fire({
@@ -70,6 +85,7 @@ const RhPage = () => {
                             key={section.id}
                             id={section.id}
                             onDelete={handleDeleteSection}
+                            onEdit={handleEditSection}
                             title={section.title}
                             subTitle={section.subTitle}
                             description={section.description}
@@ -89,6 +105,15 @@ const RhPage = () => {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onAdd={handleSectionAdded}
+                pageType="Rh"
+            />
+
+
+            <EditSectionModal
+                isOpen={isEditModalOpen}
+                onClose={() => setIsEditModalOpen(false)}
+                onEdit={handleSectionEdited}
+                id={editingId}
                 pageType="Rh"
             />
         </>

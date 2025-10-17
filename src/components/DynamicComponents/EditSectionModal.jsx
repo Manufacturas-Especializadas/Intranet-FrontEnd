@@ -18,6 +18,7 @@ export const EditSectionModal = ({ isOpen, onClose, onEdit, id, pageType }) => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [removeMedia, setRemoveMedia] = useState(false);
 
     useEffect(() => {
         if (isOpen && id) {
@@ -221,8 +222,7 @@ export const EditSectionModal = ({ isOpen, onClose, onEdit, id, pageType }) => {
 
                             {(template === "imagen" || template === "video") && (
                                 <>
-                                    {/* Previsualización actual */}
-                                    {formData.currentImgUrl && (
+                                    {formData.currentImgUrl && !removeMedia && (
                                         <div className="mb-3">
                                             <p className="text-sm text-gray-600 mb-1">
                                                 {template === "imagen" ? "Imagen actual:" : "Video actual:"}
@@ -240,9 +240,30 @@ export const EditSectionModal = ({ isOpen, onClose, onEdit, id, pageType }) => {
                                                     controls
                                                 />
                                             )}
+                                            <button
+                                                type="button"
+                                                onClick={() => setRemoveMedia(true)}
+                                                className="mt-2 text-xs text-red-500 hover:text-red-700 font-medium
+                                                hover:cursor-pointer"
+                                            >
+                                                Quitar {template === "imagen" ? "imagen" : "video"}
+                                            </button>
                                         </div>
                                     )}
 
+                                    {removeMedia && (
+                                        <div className="mb-3 p-3 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-700">
+                                            <p>Se eliminará el {template === "imagen" ? "archivo" : "video"} al guardar.</p>
+                                            <button
+                                                type="button"
+                                                onClick={() => setRemoveMedia(false)}
+                                                className="mt-1 text-xs text-blue-600 hover:text-blue-800 font-medium
+                                                hover:cursor-pointer"
+                                            >
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    )}
                                     <input
                                         type="file"
                                         id="mediaFile"

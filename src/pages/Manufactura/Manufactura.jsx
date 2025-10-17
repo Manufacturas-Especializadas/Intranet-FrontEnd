@@ -6,10 +6,13 @@ import { DynamicSection } from "../../components/DynamicComponents/DynamicSectio
 import { RoleGuard } from "../../components/RoleGuard/RoleGuard";
 import { AddSectionButton } from "../../components/DynamicComponents/AddSectionButton";
 import { AddSectionModal } from "../../components/DynamicComponents/AddSectionModal";
+import { EditSectionModal } from "../../components/DynamicComponents/EditSectionModal";
 
 const Manufactura = () => {
     const [sections, setSections] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [editingId, setEditingId] = useState(null);
 
     const getBlobContent = async () => {
         try {
@@ -26,6 +29,16 @@ const Manufactura = () => {
 
     const handleSectionAdded = () => {
         setIsModalOpen(false);
+        getBlobContent();
+    };
+
+    const handleEditSection = (id) => {
+        setEditingId(id);
+        setIsEditModalOpen(true);
+    };
+
+    const handleSectionEdited = () => {
+        setIsEditModalOpen(false);
         getBlobContent();
     };
 
@@ -68,6 +81,7 @@ const Manufactura = () => {
                         <DynamicSection
                             key={section.id}
                             id={section.id}
+                            onEdit={handleEditSection}
                             onDelete={handleDeleteSection}
                             title={section.title}
                             subTitle={section.subTitle}
@@ -88,6 +102,14 @@ const Manufactura = () => {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onAdd={handleSectionAdded}
+                pageType="Manufactura"
+            />
+
+            <EditSectionModal
+                isOpen={isEditModalOpen}
+                onClose={() => setIsEditModalOpen(false)}
+                onEdit={handleSectionEdited}
+                id={editingId}
                 pageType="Manufactura"
             />
         </>

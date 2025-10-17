@@ -33,7 +33,6 @@ const CapacitacionPage = () => {
     };
 
     const handleEditSection = (id) => {
-        console.log("Editando contenido con ID:", id);
         setEditingId(id);
         setIsEditModalOpen(true);
     };
