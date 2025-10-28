@@ -102,12 +102,11 @@ export const DetalleNoticia = () => {
                         overflow: 'hidden',
                     }}
                 >
-                    {/* 🖼️ Layout de Banner: Imagen arriba */}
                     <Box
-                        onClick={handleOpenImageModal} // Abrir modal al hacer clic
+                        onClick={handleOpenImageModal}
                         sx={{
                             height: { xs: 250, sm: 350, md: 400 },
-                            cursor: 'pointer', // Indicar que es clickeable
+                            cursor: 'pointer',
                             '&:hover': {
                                 opacity: 0.9
                             }
@@ -121,9 +120,7 @@ export const DetalleNoticia = () => {
                         />
                     </Box>
 
-                    {/* 📝 Contenido de texto debajo */}
                     <Box sx={{ p: { xs: 3, md: 5 } }}>
-                        {/* Usamos Stack para un espaciado consistente y limpio */}
                         <Stack spacing={2}>
                             <Typography
                                 variant="h3"
@@ -133,7 +130,6 @@ export const DetalleNoticia = () => {
                                 {internalNews.title}
                             </Typography>
 
-                            {/* 📅 Metadatos: Fecha de publicación */}
                             <Box sx={{ display: 'flex', alignItems: 'center', color: 'text.secondary' }}>
                                 <CalendarTodayIcon sx={{ fontSize: 16, mr: 1 }} />
                                 <Typography variant="body2">{formattedDate}</Typography>
@@ -154,7 +150,6 @@ export const DetalleNoticia = () => {
                 </Paper>
             </Container>
 
-            {/* 👁️ Modal para ver la imagen en grande (Lightbox) */}
             <Modal
                 open={isImageModalOpen}
                 onClose={handleCloseImageModal}
