@@ -166,6 +166,11 @@ export const Login = () => {
                             </button>
                         </div>
                     </form>
+
+                    <p className="mt-8 text-center text-sm text-gray-600">
+                        ¿Necesitas publicar algo en la intranet de MESA?
+                        Comunícate con el <span className="font-semibold text-gray-800">Departamento de Innovación</span> para solicitar permisos.
+                    </p>
                 </div>
             </div>
         </>
