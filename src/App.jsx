@@ -49,6 +49,7 @@ const App = () => {
 
             <Route path="/formulario-colaborador" element={<FeaturedCollaboratorsForm />} />
 
+            <Route path="/editar-noticia/:id" element={<NoticiasForm />} />
             <Route path="/noticia/:id" element={<DetalleNoticia />} />
             <Route path="/nueva-noticia" element={<NoticiasForm />} />
 
