@@ -6,6 +6,8 @@ export const API_ENDPOINTS = {
     },
     INTERNALNEWS: {
         REGISTER: "/InternalNew/CreateInternalNew",
+        UPDATE: "/InternalNew/UpdateInteranlNew/",
+        DELETE: "/InternalNew/DeleteInternalNew/",
         GETINTERNALNEWS: "/InternalNew/GetInternalNews",
         GETINTERNALNEWSBYID: "/InternalNew/GetInternalNewsById/"
     },
