@@ -7,6 +7,7 @@ import { AddSectionModal } from "../../components/DynamicComponents/AddSectionMo
 import { RoleGuard } from "../../components/RoleGuard/RoleGuard";
 import { EditSectionModal } from "../../components/DynamicComponents/EditSectionModal";
 import blogContentService from "../../api/services/blogContentService";
+import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
 import Swal from "sweetalert2";
 
 const RhPage = () => {
@@ -14,6 +15,7 @@ const RhPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editingId, setEditingId] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const getBlobContent = async () => {
         try {
@@ -21,6 +23,9 @@ const RhPage = () => {
             setSections(response.data);
         } catch (error) {
             console.error("Error al obtener la data", error);
+            setSections([]);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -73,6 +78,37 @@ const RhPage = () => {
         });
     };
 
+    const renderContent = () => {
+        if (isLoading) {
+            return <LoadingSpinner />
+        }
+
+        if (sections.length === 0) {
+            return (
+                <div className="text-center py-20">
+                    <p className="text-lg text-gray-500">
+                        No hay secciones para mostrar
+                    </p>
+                </div>
+            )
+        }
+
+        return sections.map(section => (
+            <DynamicSection
+                key={section.id}
+                id={section.id}
+                onEdit={handleEditSection}
+                onDelete={handleDeleteSection}
+                title={section.title}
+                subTitle={section.subTitle}
+                description={section.description}
+                content={section.content}
+                imageUrl={section.img}
+                template={section.template}
+            />
+        ))
+    };
+
     return (
         <>
             <Hero />
@@ -80,20 +116,7 @@ const RhPage = () => {
 
             <main className="max-w-full mx-auto space-y-2">
                 {
-                    sections.map(section => (
-                        <DynamicSection
-                            key={section.id}
-                            id={section.id}
-                            onDelete={handleDeleteSection}
-                            onEdit={handleEditSection}
-                            title={section.title}
-                            subTitle={section.subTitle}
-                            description={section.description}
-                            content={section.content}
-                            imageUrl={section.img}
-                            template={section.template}
-                        />
-                    ))
+                    renderContent()
                 }
             </main>
 

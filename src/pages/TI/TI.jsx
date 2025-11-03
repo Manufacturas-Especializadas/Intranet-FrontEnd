@@ -6,10 +6,13 @@ import { DynamicSection } from "../../components/DynamicComponents/DynamicSectio
 import { RoleGuard } from "../../components/RoleGuard/RoleGuard";
 import { AddSectionButton } from "../../components/DynamicComponents/AddSectionButton";
 import { AddSectionModal } from "../../components/DynamicComponents/AddSectionModal";
+import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
+
 
 export const TI = () => {
     const [sections, setSections] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const getBlobContent = async () => {
         try {
@@ -17,8 +20,11 @@ export const TI = () => {
             setSections(response.data);
         } catch (error) {
             console.error("Error al obtener la data", error);
+            setSections([]);
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         getBlobContent()
@@ -57,25 +63,45 @@ export const TI = () => {
             }
         });
     };
+
+    const renderContent = () => {
+        if (isLoading) {
+            return <LoadingSpinner />
+        }
+
+        if (sections.length === 0) {
+            return (
+                <div className="text-center py-20">
+                    <p className="text-lg text-gray-500">
+                        No hay secciones para mostrar
+                    </p>
+                </div>
+            )
+        }
+
+        return sections.map(section => (
+            <DynamicSection
+                key={section.id}
+                id={section.id}
+                onEdit={handleEditSection}
+                onDelete={handleDeleteSection}
+                title={section.title}
+                subTitle={section.subTitle}
+                description={section.description}
+                content={section.content}
+                imageUrl={section.img}
+                template={section.template}
+            />
+        ))
+    };
+
     return (
         <div>
             <Hero />
 
             <main className="max-w-full mx-auto space-y-2">
                 {
-                    sections.map(section => (
-                        <DynamicSection
-                            key={section.id}
-                            id={section.id}
-                            onDelete={handleDeleteSection}
-                            title={section.title}
-                            subTitle={section.subTitle}
-                            description={section.description}
-                            content={section.content}
-                            imageUrl={section.img}
-                            template={section.template}
-                        />
-                    ))
+                    renderContent()
                 }
             </main >
 
