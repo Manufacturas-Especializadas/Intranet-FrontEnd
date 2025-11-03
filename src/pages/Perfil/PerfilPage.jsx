@@ -42,7 +42,7 @@ const todosLosFormularios = {
 };
 
 const permisosPorFormulario = {
-    noticias: ["Admin", "Recursos humanos"],
+    noticias: ["Admin", "Recursos humanos", "Capacitación", "Manufactura", "A&T", "Owner", "User", "IT"],
     proyectos: ["Admin"],
     usuarios: ["Admin", "Recursos humanos"],
     tickets: ["Admin"]
