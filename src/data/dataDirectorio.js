@@ -20,12 +20,12 @@ export const direcciónGeneral = [
         ext: 110,
         nombre: "Sala de juntas dirección"
     }
-]; 
+];
 
 export const logisticaYPlaneacion = [
     {
         ext: 140,
-        nombre: "Eugenio Anguiano",
+        nombre: "Eduardo Pérez",
         puesto: "Master planner"
     },
     {
@@ -61,11 +61,6 @@ export const logisticaYPlaneacion = [
 export const finanzas = [
     {
         ext: 102,
-        telDirecto: "8850-252",
-        nombre: "Jorge Perez Maldonado",
-        puesto: "Gerente de finanzas"
-    },
-    {
         nombre: "Rosa García",
         puesto: "Directora de finanzas"
     },
@@ -88,7 +83,7 @@ export const finanzas = [
     },
     {
         ext: 295,
-        nombre: "Juan Gómez",
+        nombre: "Aldo Loera",
         puesto: "Analista de costos"
     },
     {
@@ -111,17 +106,7 @@ export const finanzas = [
     },
     {
         ext: 124,
-        nombre: "Jose Alfredo Acosta",
-        puesto: "Contador"
-    },
-    {
-        ext: 116,
-        nombre: "Norma Robles",
-        puesto: "Contador"
-    },
-    {
-        ext: 125,
-        nombre: "Leonel Hernández",
+        nombre: "Fernanda Martinez",
         puesto: "Contador"
     },
     {
@@ -142,7 +127,7 @@ export const finanzas = [
     }
 ];
 
-export const calidad = [    
+export const calidad = [
     {
         ext: 208,
         telDirecto: "8850-2512",
@@ -172,7 +157,7 @@ export const calidad = [
     }
 ];
 
-export const sistemas = [    
+export const sistemas = [
     {
         ext: 157,
         telDirecto: "8850-2505",
@@ -182,7 +167,7 @@ export const sistemas = [
     {
         ext: 158,
         nombre: "Alberto García",
-        puesto: "Ejecutivo de sistemas"
+        puesto: "Ulises Gonzalez"
     }
 ];
 
@@ -295,7 +280,7 @@ export const manufactura = [
     {
         ext: 236,
         telDirecto: "8850-2532",
-        nombre: "Rolando Montelongo",
+        nombre: "Armando Martinez",
         puesto: "Gerente de manufactura"
     },
     {
@@ -349,41 +334,21 @@ export const ehsYResponsabilidadSocial = [
     {
         ext: 250,
         telDirecto: "8850-2527",
-        nombre: "Alberto Aguilar",
-        puesto: "Gerente de EHS Y RS"
+        nombre: "Rolando Montelongo",
+        puesto: "Gerente de logistica y seguridad patrimonial"
     },
     {
         ext: 185,
         nombre: "Osvaldo Ramírez",
         puesto: "Seguridad Industrial"
     },
-    {
-        ext: 185,
-        nombre: "Mónica Ruiz",
-        puesto: "Medio ambiente y RS"
-    },
-    {
-        ext: 252,
-        nombre: "Lluvia Hernández",
-        puesto: "Enfermería"
-    },
-    {
-        ext: 252,
-        nombre: "Lilbeth",
-        puesto: "Enfermería"
-    },
 ];
 
 export const mantenimiento = [
     {
         ext: 240,
-        nombre: "Martín Banda",
-        puesto: "Jefe de Mtto"
-    },
-    {
-        ext: 241,
         nombre: "Iván Soto",
-        puesto: "Ingeniero de electromécanico"
+        puesto: "Jefe de Mtto"
     },
 ];
 
@@ -423,8 +388,8 @@ export const proyectos = [
 export const materiales = [
     {
         ext: "168",
-        nombre: "Roberto Martínez",
-        puesto: "Gerente de materiales"
+        nombre: "Edgar Rosas",
+        puesto: "Gerente de cadena de suministros"
     },
     {
         ext: "169",
@@ -485,28 +450,28 @@ export const almacen = [
     },
 ];
 
-export const aluminio = [
-    {
-        ext: "278",
-        nombre: "Armando Martínez",
-        puesto: "Jefe de producción AL"
-    },
-    {
-        ext: "279",
-        nombre: "Cristian Morín",
-        puesto: "Técnico de manufactura"
-    },
-    {
-        ext: "280",
-        nombre: "Producción Al",
-        puesto: "Asistente de producción",        
-    },
-    {
-        ext: "281",
-        nombre: "Guadalupe Rodríguez",
-        puesto: "Ingeniero de CC Al"
-    },    
-];
+// export const aluminio = [
+//     {
+//         ext: "278",
+//         nombre: "Armando Martínez",
+//         puesto: "Jefe de producción AL"
+//     },
+//     {
+//         ext: "279",
+//         nombre: "Cristian Morín",
+//         puesto: "Técnico de manufactura"
+//     },
+//     {
+//         ext: "280",
+//         nombre: "Producción Al",
+//         puesto: "Asistente de producción",
+//     },
+//     {
+//         ext: "281",
+//         nombre: "Guadalupe Rodríguez",
+//         puesto: "Ingeniero de CC Al"
+//     },
+// ];
 
 export const vigilancia = [
     {

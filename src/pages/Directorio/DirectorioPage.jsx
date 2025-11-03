@@ -13,7 +13,7 @@ import { mantenimiento } from "../../data/dataDirectorio";
 import { materiales } from "../../data/dataDirectorio";
 import { ingeneriaDeProducto } from "../../data/dataDirectorio";
 import { almacen } from "../../data/dataDirectorio";
-import { aluminio } from "../../data/dataDirectorio";
+// import { aluminio } from "../../data/dataDirectorio";
 import { vigilancia } from "../../data/dataDirectorio";
 import { embarques } from "../../data/dataDirectorio";
 
@@ -28,24 +28,24 @@ const DirectorioPage = () => {
                     </h1>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <TablaDirectorio nombreSeccion="Dirección general" datos={ direcciónGeneral }/>
-                        <TablaDirectorio nombreSeccion="Lógistica y planeación" datos={ logisticaYPlaneacion }/>
-                        <TablaDirectorio nombreSeccion="Finanzas" datos={ finanzas }/>
-                        <TablaDirectorio nombreSeccion="Calidad" datos={ calidad }/>
-                        <TablaDirectorio nombreSeccion="Sistemas" datos={ sistemas }/>
-                        <TablaDirectorio nombreSeccion="ISO" datos={ iso }/>
-                        <TablaDirectorio nombreSeccion="Ventas" datos={ ventas }/>
-                        <TablaDirectorio nombreSeccion="Producción" datos={ produccion }/>
-                        <TablaDirectorio nombreSeccion="Recursos humanos" datos={ recursosHumanos }/>
-                        <TablaDirectorio nombreSeccion="Manufactura" datos={ manufactura }/>
-                        <TablaDirectorio nombreSeccion="EH&S y Responsabilidad Social" datos={ ehsYResponsabilidadSocial }/>
-                        <TablaDirectorio nombreSeccion="Mantenimiento" datos={ mantenimiento }/>
-                        <TablaDirectorio nombreSeccion="Materiales" datos={ materiales }/>
-                        <TablaDirectorio nombreSeccion="Ingeniería de producto" datos={ ingeneriaDeProducto }/>
-                        <TablaDirectorio nombreSeccion="Almacén" datos={ almacen }/>
-                        <TablaDirectorio nombreSeccion="Aluminio" datos={ aluminio }/>
-                        <TablaDirectorio nombreSeccion="Vigilancia" datos={ vigilancia }/>
-                        <TablaDirectorio nombreSeccion="Embarques" datos={ embarques }/>
+                        <TablaDirectorio nombreSeccion="Dirección general" datos={direcciónGeneral} />
+                        <TablaDirectorio nombreSeccion="Lógistica y planeación" datos={logisticaYPlaneacion} />
+                        <TablaDirectorio nombreSeccion="Finanzas" datos={finanzas} />
+                        <TablaDirectorio nombreSeccion="Calidad" datos={calidad} />
+                        <TablaDirectorio nombreSeccion="Sistemas" datos={sistemas} />
+                        <TablaDirectorio nombreSeccion="ISO" datos={iso} />
+                        <TablaDirectorio nombreSeccion="Ventas" datos={ventas} />
+                        <TablaDirectorio nombreSeccion="Producción" datos={produccion} />
+                        <TablaDirectorio nombreSeccion="Recursos humanos" datos={recursosHumanos} />
+                        <TablaDirectorio nombreSeccion="Manufactura" datos={manufactura} />
+                        <TablaDirectorio nombreSeccion="Logistica y seguridad patrimonial" datos={ehsYResponsabilidadSocial} />
+                        <TablaDirectorio nombreSeccion="Mantenimiento" datos={mantenimiento} />
+                        <TablaDirectorio nombreSeccion="Cadena de suministros" datos={materiales} />
+                        <TablaDirectorio nombreSeccion="Ingeniería de producto" datos={ingeneriaDeProducto} />
+                        <TablaDirectorio nombreSeccion="Almacén" datos={almacen} />
+                        {/* <TablaDirectorio nombreSeccion="Aluminio" datos={aluminio} /> */}
+                        <TablaDirectorio nombreSeccion="Vigilancia" datos={vigilancia} />
+                        <TablaDirectorio nombreSeccion="Embarques" datos={embarques} />
                     </div>
                 </div>
             </section>
