@@ -7,12 +7,14 @@ import { RoleGuard } from "../../components/RoleGuard/RoleGuard";
 import { AddSectionButton } from "../../components/DynamicComponents/AddSectionButton";
 import { AddSectionModal } from "../../components/DynamicComponents/AddSectionModal";
 import { EditSectionModal } from "../../components/DynamicComponents/EditSectionModal";
+import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
 
 const CapacitacionPage = () => {
     const [sections, setSections] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editingId, setEditingId] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     const getBlobContent = async () => {
         try {
@@ -20,8 +22,11 @@ const CapacitacionPage = () => {
             setSections(response.data);
         } catch (error) {
             console.error("Error al obtener la data", error);
+            setSections([]);
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         getBlobContent()
@@ -71,26 +76,44 @@ const CapacitacionPage = () => {
         });
     };
 
+    const renderContent = () => {
+        if (isLoading) {
+            return <LoadingSpinner />
+        }
+
+        if (sections.length === 0) {
+            return (
+                <div className="text-center py-20">
+                    <p className="text-lg text-gray-500">
+                        No hay secciones para mostrar
+                    </p>
+                </div>
+            )
+        }
+
+        return sections.map(section => (
+            <DynamicSection
+                key={section.id}
+                id={section.id}
+                onEdit={handleEditSection}
+                onDelete={handleDeleteSection}
+                title={section.title}
+                subTitle={section.subTitle}
+                description={section.description}
+                content={section.content}
+                imageUrl={section.img}
+                template={section.template}
+            />
+        ))
+    };
+
     return (
         <>
             <Hero />
 
             <main className="max-w-full mx-auto space-y-2">
                 {
-                    sections.map(section => (
-                        <DynamicSection
-                            key={section.id}
-                            id={section.id}
-                            onEdit={handleEditSection}
-                            onDelete={handleDeleteSection}
-                            title={section.title}
-                            subTitle={section.subTitle}
-                            description={section.description}
-                            content={section.content}
-                            imageUrl={section.img}
-                            template={section.template}
-                        />
-                    ))
+                    renderContent()
                 }
             </main >
 
