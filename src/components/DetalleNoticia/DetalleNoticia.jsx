@@ -10,9 +10,15 @@ import {
     CircularProgress,
     Stack,
     Modal,
+    IconButton,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Swal from "sweetalert2";
+import { RoleGuard } from "../RoleGuard/RoleGuard";
+
 const modalStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -84,6 +90,57 @@ export const DetalleNoticia = () => {
         day: "numeric"
     })
 
+
+    const handleEdit = () => {
+        navigate(`/editar-noticia/${id}`);
+    };
+
+    const handleDelete = async () => {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡No podrás revertir esta acción!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, ¡eliminar!',
+            cancelButtonText: 'Cancelar'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    Swal.fire({
+                        title: "Eliminando...",
+                        text: "Por favor espere",
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    await internalNewService.delete(id);
+
+                    Swal.close();
+
+                    await Swal.fire(
+                        '¡Eliminado!',
+                        'La noticia ha sido eliminada.',
+                        'success'
+                    );
+
+                    navigate(-1);
+
+                } catch (error) {
+                    console.error("Error al eliminar la noticia", error);
+                    Swal.fire(
+                        'Error',
+                        'No se pudo eliminar la noticia. Inténtalo de nuevo.',
+                        'error'
+                    );
+                }
+            }
+        });
+    };
+
     return (
         <Box sx={{ bgcolor: 'grey.100', minHeight: '100vh', py: { xs: 4, md: 8 } }}>
             <Container maxWidth="md">
@@ -120,7 +177,44 @@ export const DetalleNoticia = () => {
                         />
                     </Box>
 
-                    <Box sx={{ p: { xs: 3, md: 5 } }}>
+                    <Box sx={{ p: { xs: 3, md: 5 }, position: "relative" }}>
+                        <RoleGuard allowedRoles={["Admin", "Recursos humanos", "Capacitación", "Manufactura", "A&T", "Owner", "User", "IT"]}>
+                            <Box sx={{
+                                position: 'absolute',
+                                top: 16,
+                                right: 16,
+                                display: 'flex',
+                                gap: 1
+                            }}>
+                                <IconButton
+                                    aria-label="Editar noticia"
+                                    onClick={handleEdit}
+                                    sx={{
+                                        color: 'primary.main',
+                                        backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                                        '&:hover': {
+                                            backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                                        }
+                                    }}
+                                >
+                                    <EditIcon />
+                                </IconButton>
+
+                                <IconButton
+                                    aria-label="Eliminar noticia"
+                                    onClick={handleDelete}
+                                    sx={{
+                                        color: 'error.main',
+                                        backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                                        '&:hover': {
+                                            backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                                        }
+                                    }}
+                                >
+                                    <DeleteIcon />
+                                </IconButton>
+                            </Box>
+                        </RoleGuard>
                         <Stack spacing={2}>
                             <Typography
                                 variant="h3"
