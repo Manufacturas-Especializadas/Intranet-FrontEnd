@@ -62,7 +62,7 @@ const EquipoDestacado = () => {
     }
 
     return (
-        <div className=" bg-gray-50">
+        <div className=" bg-gray-100">
             <div className="container mx-auto px-4">
 
                 <div className="pt-8">
