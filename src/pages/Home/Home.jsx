@@ -1,4 +1,5 @@
 import Calendario from "../../components/Calendario/Calendario"
+import { EnlacesRapidos } from "../../components/EnlacesRapidos/EnlacesRapidos"
 import EquipoDestacado from "../../components/EquipoDestacado/EquipoDestacado"
 import Footer from "../../components/Footer/Footer"
 import Hero from "../../components/Hero/Hero"
@@ -8,12 +9,13 @@ import Valores from "../../components/Valores/Valores"
 const Home = () => {
     return (
         <>
-            <Hero/>
-            <Noticias/>
-            <Valores/>
-            <Calendario/>
-            <EquipoDestacado/>
-            <Footer/>
+            <Hero />
+            <Noticias />
+            <EnlacesRapidos />
+            <Valores />
+            <Calendario />
+            <EquipoDestacado />
+            <Footer />
         </>
     )
 }
