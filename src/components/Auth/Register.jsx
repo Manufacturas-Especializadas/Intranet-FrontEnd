@@ -29,6 +29,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(false);
 
     setIsSubmitting(true);
 
@@ -45,6 +46,7 @@ const Register = () => {
         text: "Por favor, completa todos los campos",
         confirmButtonText: "Aceptar",
       });
+      setError(true);
       setIsSubmitting(false);
 
       return;
@@ -59,6 +61,7 @@ const Register = () => {
         text: "El número de nómina debe ser un valor numérico",
         confirmButtonText: "Aceptar",
       });
+      setError(true);
       setIsSubmitting(false);
       return;
     }
