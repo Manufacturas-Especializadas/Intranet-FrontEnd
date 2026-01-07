@@ -1,149 +1,93 @@
-import HeaderTitle from "../HeaderTitle/HeaderTitle";
-import { FaBullhorn, FaPencilAlt, FaTrash } from "react-icons/fa";
+import { FaPencilAlt, FaRegClock, FaTrash, FaUserCircle } from "react-icons/fa";
 import { RoleGuard } from "../RoleGuard/RoleGuard";
 
-export const DynamicSection = ({ id, title, subTitle, description, content, imageUrl, template, onDelete, onEdit }) => {
-    if (template === "imagen" && imageUrl) {
-        return (
-            <section className="min-h-[550px] flex items-center bg-gray-100 py-12 sm:py-0 relative">
-                <RoleGuard allowedRoles={["Admin", "Recursos humanos", "Calidad", "TI", "Manufactura", "A&T"]}>
-                    <div className="absolute top-4 left-4 z-20 flex gap-2">
-                        <button
-                            className="text-gray-400 hover:text-blue-500 transition-colors 
-                            p-2 rounded-full hover:cursor-pointer"
-                            onClick={() => onEdit(id)}
-                            title="Editar contenido"
-                        >
-                            <FaPencilAlt size={20} />
-                        </button>
-                        <button
-                            onClick={() => onDelete(id)}
-                            className="text-gray-400 hover:text-red-500 transition-colors 
-                            p-2 rounded-full hover:cursor-pointer"
-                            title="Eliminar contenido"
-                        >
-                            <FaTrash size={20} />
-                        </button>
-                    </div>
-                </RoleGuard>
-                <div className="contianer mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        <div className="order-2 md:order-1">
-                            <img
-                                src={imageUrl}
-                                alt={title}
-                                className="w-full max-w-md mx-auto rounded-lg shadow-2xl
-                                transform -rotate-2 transition-all duration-300
-                                hover:rotate-0 hover:scale-105"
-                            />
-                        </div>
+export const DynamicSection = ({
+  id,
+  title,
+  content,
+  onDelete,
+  onEdit,
+  isPreview = false,
+}) => {
+  const renderContent = () => {
+    if (!content) return null;
 
-                        <div className="order-1 md:order-2 flex flex-col justify-center space-y-6">
-                            <HeaderTitle
-                                title={title}
-                                subtitle={subTitle}
-                                description={description}
-                            />
-                            <p className="text-[17px] mt-3 text-gray-600 whitespace-pre-wrap leading-relaxed">
-                                {content}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        )
+    if (isPreview) {
+      return content.length > 200 ? content.slice(0, 200) + "..." : content;
     }
+    return content;
+  };
 
-    if (template === "video" && imageUrl) {
-        return (
-            <section className="min-h-[550px] flex items-center bg-gray-100 py-12 sm:py-0 relative">
-                <RoleGuard allowedRoles={["Admin", "Recursos humanos", "Calidad", "TI", "Manufactura", "A&T"]}>
-                    <div className="absolute top-4 left-4 z-20 flex gap-2">
-                        <button
-                            className="text-gray-400 hover:text-blue-500 transition-colors 
-                            p-2 rounded-full hover:cursor-pointer"
-                            onClick={() => onEdit(id)}
-                            title="Editar contenido"
-                        >
-                            <FaPencilAlt size={20} />
-                        </button>
-                        <button
-                            onClick={() => onDelete(id)}
-                            className="text-gray-400 hover:text-red-500 transition-colors 
-                            p-2 rounded-full hover:cursor-pointer"
-                            title="Eliminar contenido"
-                        >
-                            <FaTrash size={20} />
-                        </button>
-                    </div>
-                </RoleGuard>
-
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        <div className="order-2 md:order-1 flex justify-center">
-                            <video
-                                controls
-                                src={imageUrl}
-                                className="w-full max-w-md mx-auto rounded-lg shadow-2xl transform"
-                                poster=""
-                            >
-                                Tu navegador no soporta la reproducción de videos.
-                            </video>
-                        </div>
-                        <div className="order-1 md:order-2 flex flex-col justify-center space-y-6">
-                            <HeaderTitle
-                                title={title}
-                                subtitle={subTitle}
-                                description={description}
-                            />
-                            <p className="text-[17px] mt-3 text-gray-600 whitespace-pre-wrap leading-relaxed">
-                                {content}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        );
-    }
-
-    return (
-        <section>
-            <div className="max-w-full mx-auto">
-                <div className="relative rounded-xl shadow-lg transition-shadow hover:shadow-xl overflow-hidden p-8 md:p-12 text-center">
-                    <RoleGuard allowedRoles={["Admin", "Recursos humanos", "Calidad", "TI", "Manufactura", "A&T"]}>
-                        <div className="absolute top-4 left-4 z-20 flex gap-2">
-                            <button
-                                className="text-gray-400 hover:text-blue-500 transition-colors 
-                            p-2 rounded-full hover:cursor-pointer"
-                                onClick={() => onEdit(id)}
-                                title="Editar contenido"
-                            >
-                                <FaPencilAlt size={20} />
-                            </button>
-                            <button
-                                onClick={() => onDelete(id)}
-                                className="text-gray-400 hover:text-red-500 transition-colors 
-                            p-2 rounded-full hover:cursor-pointer"
-                                title="Eliminar contenido"
-                            >
-                                <FaTrash size={20} />
-                            </button>
-                        </div>
-                    </RoleGuard>
-                    <FaBullhorn className="absolute -top-4 -right-4 text-gray-100 text-9xl transform rotate-12 -z-0" />
-
-                    <div className="relative z-10">
-                        <HeaderTitle
-                            title={title}
-                            subtitle={subTitle}
-                            description={description}
-                        />
-                        <p className="mt-4 text-gray-700 text-lg whitespace-pre-wrap leading-relaxed">
-                            {content}
-                        </p>
-                    </div>
-                </div>
+  return (
+    <article
+      className="bg-white p-5 rounded-xl shadow-sm border border-gray-200 
+      hover:shadow-md transition-all duration-200 group h-full flex flex-col"
+    >
+      <div className="flex justify-between items-start mb-3">
+        <div className="flex items-center gap-3">
+          <div
+            className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-blue-400 
+            flex items-center justify-center text-white shadow-sm"
+          >
+            <FaUserCircle size={24} />
+          </div>
+          <div>
+            <h3 className="font-bold text-gray-900 text-base leading-tight">
+              Capacitación
+            </h3>
+            <div className="flex items-center gap-2 text-xs text-gray-500 mt-0.5">
+              <div className="flex items-center gap-1">
+                <FaRegClock />
+                <span>Reciente</span>
+              </div>
             </div>
-        </section>
-    )
-}
+          </div>
+        </div>
+
+        <RoleGuard
+          allowedRoles={["Admin", "Recursos humanos", "Capacitación", "TI"]}
+        >
+          <div
+            className="flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => onEdit(id)}
+              className="p-2 text-gray-400 hover:text-blue-600 rounded-full"
+            >
+              <FaPencilAlt size={16} />
+            </button>
+            <button
+              onClick={() => onDelete(id)}
+              className="p-2 text-gray-400 hover:text-red-600 rounded-full"
+            >
+              <FaTrash size={16} />
+            </button>
+          </div>
+        </RoleGuard>
+      </div>
+
+      <div className="mt-2 flex-grow">
+        {title && (
+          <h4
+            className={`font-bold text-gray-800 mb-2 ${
+              isPreview ? "text-lg" : "text-2xl"
+            }`}
+          >
+            {title}
+          </h4>
+        )}
+
+        <p className="text-gray-700 whitespace-pre-line leading-relaxed">
+          {renderContent()}
+        </p>
+
+        {isPreview && content && content.length > 200 && (
+          <span className="inline-block mt-2 text-blue-600 font-medium text-sm hover:underline cursor-pointer">
+            Ver más...
+          </span>
+        )}
+      </div>
+    </article>
+  );
+};
