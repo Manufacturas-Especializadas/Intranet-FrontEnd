@@ -1,56 +1,139 @@
+import { useState } from "react";
 import TablaDirectorio from "../../components/TablaDirectorio/TablaDirectorio";
-import { calidad, direcciónGeneral } from "../../data/dataDirectorio";
-import { logisticaYPlaneacion } from "../../data/dataDirectorio";
-import { finanzas } from "../../data/dataDirectorio";
-import { sistemas } from "../../data/dataDirectorio";
-import { iso } from "../../data/dataDirectorio";
-import { ventas } from "../../data/dataDirectorio";
-import { produccion } from "../../data/dataDirectorio";
-import { recursosHumanos } from "../../data/dataDirectorio";
-import { manufactura } from "../../data/dataDirectorio";
-import { ehsYResponsabilidadSocial } from "../../data/dataDirectorio";
-import { mantenimiento } from "../../data/dataDirectorio";
-import { materiales } from "../../data/dataDirectorio";
-import { ingeneriaDeProducto } from "../../data/dataDirectorio";
-import { almacen } from "../../data/dataDirectorio";
-// import { aluminio } from "../../data/dataDirectorio";
-import { vigilancia } from "../../data/dataDirectorio";
-import { embarques } from "../../data/dataDirectorio";
+import {
+  FaSearch,
+  FaBuilding,
+  FaShippingFast,
+  FaChartLine,
+  FaCheckDouble,
+  FaLaptopCode,
+  FaUserTie,
+  FaIndustry,
+  FaHardHat,
+  FaBoxOpen,
+  FaShieldAlt,
+} from "react-icons/fa";
+
+// Importa tus datos (asegúrate que las rutas estén bien)
+import {
+  calidad,
+  direcciónGeneral,
+  logisticaYPlaneacion,
+  finanzas,
+  sistemas,
+  iso,
+  ventas,
+  produccion,
+  recursosHumanos,
+  manufactura,
+  ehsYResponsabilidadSocial,
+  mantenimiento,
+  materiales,
+  ingeneriaDeProducto,
+  almacen,
+  vigilancia,
+  embarques,
+} from "../../data/dataDirectorio";
 
 const DirectorioPage = () => {
+  const [searchTerm, setSearchTerm] = useState("");
 
-    return (
-        <>
-            <section className="bg-gray-100 py-12 min-h-screen">
-                <div className="container mx-auto px-4">
-                    <h1 className="text-3xl font-bold mb-6 text-center">
-                        Directorio MESA
-                    </h1>
+  // Mapa de todas las secciones con sus iconos
+  const secciones = [
+    { title: "Dirección General", data: direcciónGeneral, icon: FaUserTie },
+    {
+      title: "Logística y Planeación",
+      data: logisticaYPlaneacion,
+      icon: FaShippingFast,
+    },
+    { title: "Finanzas", data: finanzas, icon: FaChartLine },
+    { title: "Calidad", data: calidad, icon: FaCheckDouble },
+    { title: "Sistemas", data: sistemas, icon: FaLaptopCode },
+    { title: "ISO", data: iso, icon: FaCheckDouble },
+    { title: "Ventas", data: ventas, icon: FaChartLine },
+    { title: "Producción", data: produccion, icon: FaIndustry },
+    { title: "Recursos Humanos", data: recursosHumanos, icon: FaUserTie },
+    { title: "Manufactura", data: manufactura, icon: FaIndustry },
+    {
+      title: "Seguridad Patrimonial",
+      data: ehsYResponsabilidadSocial,
+      icon: FaShieldAlt,
+    },
+    { title: "Mantenimiento", data: mantenimiento, icon: FaHardHat },
+    { title: "Cadena de Suministros", data: materiales, icon: FaBoxOpen },
+    {
+      title: "Ingeniería de Producto",
+      data: ingeneriaDeProducto,
+      icon: FaLaptopCode,
+    },
+    { title: "Almacén", data: almacen, icon: FaBoxOpen },
+    { title: "Vigilancia", data: vigilancia, icon: FaShieldAlt },
+    { title: "Embarques", data: embarques, icon: FaShippingFast },
+  ];
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <TablaDirectorio nombreSeccion="Dirección general" datos={direcciónGeneral} />
-                        <TablaDirectorio nombreSeccion="Lógistica y planeación" datos={logisticaYPlaneacion} />
-                        <TablaDirectorio nombreSeccion="Finanzas" datos={finanzas} />
-                        <TablaDirectorio nombreSeccion="Calidad" datos={calidad} />
-                        <TablaDirectorio nombreSeccion="Sistemas" datos={sistemas} />
-                        <TablaDirectorio nombreSeccion="ISO" datos={iso} />
-                        <TablaDirectorio nombreSeccion="Ventas" datos={ventas} />
-                        <TablaDirectorio nombreSeccion="Producción" datos={produccion} />
-                        <TablaDirectorio nombreSeccion="Recursos humanos" datos={recursosHumanos} />
-                        <TablaDirectorio nombreSeccion="Manufactura" datos={manufactura} />
-                        <TablaDirectorio nombreSeccion="Logistica y seguridad patrimonial" datos={ehsYResponsabilidadSocial} />
-                        <TablaDirectorio nombreSeccion="Mantenimiento" datos={mantenimiento} />
-                        <TablaDirectorio nombreSeccion="Cadena de suministros" datos={materiales} />
-                        <TablaDirectorio nombreSeccion="Ingeniería de producto" datos={ingeneriaDeProducto} />
-                        <TablaDirectorio nombreSeccion="Almacén" datos={almacen} />
-                        {/* <TablaDirectorio nombreSeccion="Aluminio" datos={aluminio} /> */}
-                        <TablaDirectorio nombreSeccion="Vigilancia" datos={vigilancia} />
-                        <TablaDirectorio nombreSeccion="Embarques" datos={embarques} />
-                    </div>
-                </div>
-            </section>
-        </>
-    )
-}
+  // Función de filtrado inteligente
+  const seccionesFiltradas = secciones
+    .map((seccion) => {
+      const datosFiltrados = seccion.data.filter(
+        (persona) =>
+          persona.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          persona.puesto.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          persona.ext?.toString().includes(searchTerm)
+      );
+      return { ...seccion, data: datosFiltrados };
+    })
+    .filter((seccion) => seccion.data.length > 0); // Solo mostramos secciones con resultados
 
-export default DirectorioPage
+  return (
+    <section className="bg-gray-50 py-12 min-h-screen">
+      <div className="container mx-auto px-4 max-w-5xl">
+        {/* Header con Buscador */}
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Directorio Corporativo
+          </h1>
+          <p className="text-gray-500 mb-8">
+            Encuentra rápidamente la extensión o contacto de cualquier
+            colaborador.
+          </p>
+
+          <div className="relative max-w-xl mx-auto">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <FaSearch className="text-gray-400" />
+            </div>
+            <input
+              type="text"
+              placeholder="Buscar por nombre, puesto o extensión..."
+              className="w-full pl-11 pr-4 py-3 rounded-full border border-gray-200 shadow-sm 
+              focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all 
+              text-gray-700 bg-white"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          {seccionesFiltradas.length > 0 ? (
+            seccionesFiltradas.map((seccion, index) => (
+              <TablaDirectorio
+                key={index}
+                nombreSeccion={seccion.title}
+                datos={seccion.data}
+                icon={seccion.icon}
+              />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-gray-400 text-lg">
+                No se encontraron resultados para "{searchTerm}"
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default DirectorioPage;
