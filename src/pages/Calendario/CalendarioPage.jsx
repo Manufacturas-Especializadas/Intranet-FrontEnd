@@ -6,76 +6,78 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "dayjs/locale/es";
 
 const eventStyleGetter = (event) => {
-    const backgroundColor = event.color || "#3b82f6";
-    const color = event.textColor || "white";
+  const backgroundColor = event.color || "#3b82f6";
 
-    return{
-        style: {
-            backgroundColor,
-            borderRadius: "4px",
-            color,
-            border: "none",
-            padding: "2px 5px",
-            fontSize: "0.8rem"
-        }
-    };
+  return {
+    style: {
+      backgroundColor: backgroundColor,
+      borderRadius: "6px",
+      opacity: 0.9,
+      color: "white",
+      border: "none",
+      display: "block",
+      padding: "4px 8px",
+      fontSize: "0.85rem",
+      fontWeight: "500",
+      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    },
+  };
 };
 
 const MyCustomEvent = ({ event }) => {
-    return (
-        <div className="flex items-center justify-between h-full">
-        <span>{event.title}</span>
-        { event.icon && <span className="text-sm">{ event.icon }</span>}
-        </div>
-    );
+  return (
+    <div className="flex items-center justify-between h-full">
+      <span>{event.title}</span>
+      {event.icon && <span className="text-sm">{event.icon}</span>}
+    </div>
+  );
 };
 
 const components = {
-    event: MyCustomEvent,
+  event: MyCustomEvent,
 };
 
-
 const CalendarioPage = () => {
-    const localizer = dayjsLocalizer(dayjs);
+  const localizer = dayjsLocalizer(dayjs);
 
-    const[currentDate, setCurrentDate] = useState(new Date());
-    const[currentView, setCurrentView] = useState("month");
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentView, setCurrentView] = useState("month");
 
-    return (
-        <>
-            <section className="bg-gray-100 py-12 min-h-screen">
-                <div className="container mx-auto px-4">
-                    <h1 className="text-3xl font-bold mb-6 text-center">
-                        Calendario MESA
-                    </h1>
+  return (
+    <>
+      <section className="bg-gray-100 py-12 min-h-screen">
+        <div className="container mx-auto px-4">
+          <h1 className="text-3xl font-bold mb-6 text-center">
+            Calendario MESA
+          </h1>
 
-                    <div className="bg-white shadow-lg rounded-lg p-6 max-w-5xl mx-auto">
-                        <Calendar
-                            localizer={ localizer }
-                            events={ eventosMesa } 
-                            startAccessor="start"
-                            endAccessor="end"
-                            defaultView="month"
-                            views={["month", "week", "day", "agenda"]}
-                            view={ currentView }
-                            date={ currentDate }
-                            onNavigate={(newDate) => {
-                                setCurrentDate(newDate);
-                            }}
-                            onView={(view) => {
-                                setCurrentView(view);
-                            }}
-                            selectable
-                            eventPropGetter={ eventStyleGetter }
-                            components={ components }
-                            style={{ height: "70vh" }}
-                            className="modern-calendar"
-                        />
-                    </div>
-                </div>
-            </section>
-        </>
-    );
+          <div className="bg-white shadow-lg rounded-lg p-6 max-w-5xl mx-auto">
+            <Calendar
+              localizer={localizer}
+              events={eventosMesa}
+              startAccessor="start"
+              endAccessor="end"
+              defaultView="month"
+              views={["month", "week", "day", "agenda"]}
+              view={currentView}
+              date={currentDate}
+              onNavigate={(newDate) => {
+                setCurrentDate(newDate);
+              }}
+              onView={(view) => {
+                setCurrentView(view);
+              }}
+              selectable
+              eventPropGetter={eventStyleGetter}
+              components={components}
+              style={{ height: "70vh" }}
+              className="modern-calendar"
+            />
+          </div>
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default CalendarioPage;
