@@ -1,6 +1,12 @@
 import { useRef } from "react";
 import { useCreatePost } from "../../hooks/useCreatePost";
-import { FaImage, FaPaperPlane, FaTimes, FaVideo } from "react-icons/fa";
+import {
+  FaImage,
+  FaPaperPlane,
+  FaTimes,
+  FaVideo,
+  FaUserCircle,
+} from "react-icons/fa";
 
 export const CreatePostWidget = ({ onPostCreated, sectionName }) => {
   const {
@@ -31,7 +37,7 @@ export const CreatePostWidget = ({ onPostCreated, sectionName }) => {
           onClick={() => setIsExpanded(true)}
         >
           <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-blue-500 flex items-center justify-center text-white font-bold shadow-sm group-hover:scale-105 transition-transform">
-            Yo
+            <FaUserCircle />
           </div>
           <div className="flex-1 bg-gray-100 group-hover:bg-gray-200 rounded-full py-2.5 px-4 text-gray-500 transition-colors duration-200">
             ¿Qué hay de nuevo en {sectionName}?
