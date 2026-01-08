@@ -60,7 +60,7 @@ export const PostDetailModal = ({ isOpen, onClose, post }) => {
 
         <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar bg-white">
           {post.title && (
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 uppercase">
               {post.title}
             </h2>
           )}
@@ -68,7 +68,6 @@ export const PostDetailModal = ({ isOpen, onClose, post }) => {
             {post.content}
           </div>
 
-          {/* Galería Vertical de Medios */}
           <div className="space-y-6">
             {mediaList.map((item, index) => {
               const isVideo = item.mediaType?.toLowerCase() === "video";

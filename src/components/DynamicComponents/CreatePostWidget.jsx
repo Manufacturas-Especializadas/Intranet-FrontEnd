@@ -57,7 +57,7 @@ export const CreatePostWidget = ({ onPostCreated, sectionName }) => {
               type="text"
               placeholder="Título de la noticia..."
               className="w-full text-lg font-bold placeholder-gray-400 border-none focus:ring-0 px-0 
-              outline-none bg-transparent"
+              outline-none bg-transparent uppercase"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               autoFocus
