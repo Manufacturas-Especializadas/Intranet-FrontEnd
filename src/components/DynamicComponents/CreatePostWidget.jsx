@@ -26,7 +26,6 @@ export const CreatePostWidget = ({ onPostCreated, sectionName }) => {
   return (
     <div className="bg-white rounded-xl shadow-sm hover:shadow-md p-4 mb-6 border border-gray-200 transition-all duration-300">
       {!isExpanded ? (
-        // --- ESTADO COLAPSADO ---
         <div
           className="flex items-center gap-3 cursor-pointer group"
           onClick={() => setIsExpanded(true)}
@@ -134,7 +133,8 @@ export const CreatePostWidget = ({ onPostCreated, sectionName }) => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`flex items-center gap-2 px-6 py-2 rounded-lg text-white font-medium shadow-md transition-all
+              className={`flex items-center gap-2 px-6 py-2 rounded-lg text-white font-medium 
+                  shadow-md transition-all hover:cursor-pointer
                 ${
                   isLoading
                     ? "bg-blue-400 cursor-not-allowed"
