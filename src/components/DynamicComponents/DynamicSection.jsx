@@ -7,6 +7,7 @@ export const DynamicSection = ({
   content,
   onDelete,
   onEdit,
+  sectionName,
   isPreview = false,
 }) => {
   const renderContent = () => {
@@ -33,7 +34,7 @@ export const DynamicSection = ({
           </div>
           <div>
             <h3 className="font-bold text-gray-900 text-base leading-tight">
-              Capacitación
+              {sectionName}
             </h3>
             <div className="flex items-center gap-2 text-xs text-gray-500 mt-0.5">
               <div className="flex items-center gap-1">

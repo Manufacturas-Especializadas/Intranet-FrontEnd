@@ -58,6 +58,7 @@ const RhPage = () => {
                   content={post.content}
                   template={post.template}
                   isPreview={true}
+                  sectionName="Recursos Humanos"
                 />
               </div>
             ))

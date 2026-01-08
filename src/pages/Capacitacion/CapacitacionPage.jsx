@@ -58,6 +58,7 @@ const CapacitacionPage = () => {
                   content={post.content}
                   template={post.template}
                   isPreview={true}
+                  sectionName="Capacitación"
                 />
               </div>
             ))

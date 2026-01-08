@@ -56,6 +56,7 @@ const Seguridad = () => {
                   content={post.content}
                   template={post.template}
                   isPreview={true}
+                  sectionName="Seguridad"
                 />
               </div>
             ))

@@ -56,6 +56,7 @@ const Calidad = () => {
                   content={post.content}
                   template={post.template}
                   isPreview={true}
+                  sectionName="Calidad"
                 />
               </div>
             ))
