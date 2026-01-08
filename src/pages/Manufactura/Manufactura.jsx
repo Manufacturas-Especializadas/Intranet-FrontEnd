@@ -1,8 +1,5 @@
 import Hero from "../../components/ManufacturaComponentes/Hero/Hero";
 import { RoleGuard } from "../../components/RoleGuard/RoleGuard";
-import { AddSectionButton } from "../../components/DynamicComponents/AddSectionButton";
-import { AddSectionModal } from "../../components/DynamicComponents/AddSectionModal";
-import { EditSectionModal } from "../../components/DynamicComponents/EditSectionModal";
 import { useBlogPosts } from "../../hooks/useBlogPosts";
 import { CreatePostWidget } from "../../components/DynamicComponents/CreatePostWidget";
 import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
