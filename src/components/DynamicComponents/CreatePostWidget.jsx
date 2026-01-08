@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useCreatePost } from "../../hooks/useCreatePost";
-import { FaImage, FaPaperPlane, FaTimes, FaVideo } from "react-icons/fa"; // Agregué FaVideo
+import { FaImage, FaPaperPlane, FaTimes, FaVideo } from "react-icons/fa";
 
 export const CreatePostWidget = ({ onPostCreated, sectionName }) => {
   const {
