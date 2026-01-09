@@ -38,7 +38,6 @@ import {
 const DirectorioPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Mapa de todas las secciones con sus iconos
   const secciones = [
     { title: "Dirección General", data: direcciónGeneral, icon: FaUserTie },
     {
@@ -71,7 +70,6 @@ const DirectorioPage = () => {
     { title: "Embarques", data: embarques, icon: FaShippingFast },
   ];
 
-  // Función de filtrado inteligente
   const seccionesFiltradas = secciones
     .map((seccion) => {
       const datosFiltrados = seccion.data.filter(
@@ -82,12 +80,11 @@ const DirectorioPage = () => {
       );
       return { ...seccion, data: datosFiltrados };
     })
-    .filter((seccion) => seccion.data.length > 0); // Solo mostramos secciones con resultados
+    .filter((seccion) => seccion.data.length > 0);
 
   return (
     <section className="bg-gray-50 py-12 min-h-screen">
       <div className="container mx-auto px-4 max-w-5xl">
-        {/* Header con Buscador */}
         <div className="text-center mb-10">
           <h1 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
             Directorio Corporativo
