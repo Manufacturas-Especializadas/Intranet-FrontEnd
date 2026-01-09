@@ -17,6 +17,10 @@ const CapacitacionPage = () => {
     isDetailOpen,
     openPostDetail,
     closePostDetail,
+    editingPost,
+    startEditing,
+    cancelEditing,
+    handleUpdatePost,
   } = useBlogPosts("Capacitacion");
 
   return (
@@ -27,6 +31,10 @@ const CapacitacionPage = () => {
         <RoleGuard allowedRoles={["Admin", "Recursos humanos", "Capacitación"]}>
           <CreatePostWidget
             onPostCreated={fetchPost}
+            onPostUpdated={handleUpdatePost}
+            onCancelEdit={cancelEditing}
+            postToEdit={editingPost}
+            isEditing={!!editingPost}
             sectionName="Capacitacion"
           />
         </RoleGuard>
@@ -51,8 +59,10 @@ const CapacitacionPage = () => {
                   <DynamicSection
                     id={post.id}
                     onDelete={(e) => {
-                      e.stopPropagation();
                       deletePost(post.id);
+                    }}
+                    onEdit={(e) => {
+                      startEditing(post);
                     }}
                     title={post.title}
                     blogMedias={post.blogMedia}

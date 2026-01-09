@@ -12,26 +12,35 @@ export const useCreatePost = (sectionName, onSuccess) => {
   const [mediaFiles, setMediaFiles] = useState([]);
   const [previews, setPreviews] = useState([]);
 
+  const [mediaIdsToDelete, setMediaIdsToDelete] = useState([]);
+
   const handleImageChange = (e) => {
     if (!e.target.files || e.target.files.length === 0) return;
-
     const files = Array.from(e.target.files);
-
     setMediaFiles((prev) => [...prev, ...files]);
-
     const newPreviews = files.map((file) => ({
       url: URL.createObjectURL(file),
       type: file.type.startsWith("video") ? "video" : "image",
+      isExisting: false,
     }));
     setPreviews((prev) => [...prev, ...newPreviews]);
-
     e.target.value = "";
   };
 
   const removeMedia = (index) => {
-    URL.revokeObjectURL(previews[index].url);
+    const itemToRemove = previews[index];
 
-    setMediaFiles((prev) => prev.filter((_, i) => i !== index));
+    if (itemToRemove.isExisting) {
+      setMediaIdsToDelete((prev) => [...prev, itemToRemove.id]);
+    } else if (itemToRemove.url) {
+      URL.revokeObjectURL(itemToRemove.url);
+
+      const newFiles = mediaFiles.filter(
+        (_, i) => i !== index - previews.filter((p) => p.isExisting).length
+      );
+      setMediaFiles(newFiles);
+    }
+
     setPreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
@@ -40,6 +49,7 @@ export const useCreatePost = (sectionName, onSuccess) => {
     setContent("");
     setMediaFiles([]);
     setPreviews([]);
+    setMediaIdsToDelete([]);
     setIsExpanded(false);
   };
 
@@ -90,9 +100,15 @@ export const useCreatePost = (sectionName, onSuccess) => {
     setTitle,
     content,
     setContent,
+    setPreviews,
     previews,
+    mediaFiles,
+    setMediaFiles,
+    mediaIdsToDelete,
+    setMediaIdsToDelete,
     removeMedia,
     handleImageChange,
     handleSubmit,
+    resetForm,
   };
 };

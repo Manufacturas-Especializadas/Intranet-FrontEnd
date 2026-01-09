@@ -9,6 +9,8 @@ export const useBlogPosts = (sectionName) => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
+  const [editingPost, setEditingPost] = useState(null);
+
   const fetchPost = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -55,6 +57,36 @@ export const useBlogPosts = (sectionName) => {
     }
   };
 
+  const startEditing = (post) => {
+    setEditingPost(post);
+
+    window.scroll({ top: 0, behavior: "smooth" });
+  };
+
+  const cancelEditing = () => {
+    setEditingPost(null);
+  };
+
+  const handleUpdatePost = async (id, formData) => {
+    try {
+      await blogContentService.update(id, formData);
+
+      Swal.fire({
+        icon: "success",
+        title: "Actualizado",
+        text: "La publicación se editó correctamente",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      await fetchPost();
+      setEditingPost(null);
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "No se pudo actualizar la publicación", "error");
+    }
+  };
+
   const openPostDetail = (post) => {
     setSelectedPost(post);
     setIsDetailOpen(true);
@@ -65,6 +97,8 @@ export const useBlogPosts = (sectionName) => {
     setTimeout(() => setSelectedPost(null), 300);
   };
 
+  const resetForm = () => {};
+
   return {
     posts,
     isLoading,
@@ -74,5 +108,9 @@ export const useBlogPosts = (sectionName) => {
     isDetailOpen,
     openPostDetail,
     closePostDetail,
+    editingPost,
+    startEditing,
+    cancelEditing,
+    handleUpdatePost,
   };
 };

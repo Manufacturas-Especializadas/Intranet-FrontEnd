@@ -54,13 +54,19 @@ export const DynamicSection = ({
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => onEdit(id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit(id);
+              }}
               className="p-2 text-gray-400 hover:text-blue-600 rounded-full"
             >
               <FaPencilAlt size={16} />
             </button>
             <button
-              onClick={() => onDelete(id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(id);
+              }}
               className="p-2 text-gray-400 hover:text-red-600 rounded-full"
             >
               <FaTrash size={16} />
