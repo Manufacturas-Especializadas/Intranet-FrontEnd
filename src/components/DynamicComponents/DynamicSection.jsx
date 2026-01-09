@@ -8,6 +8,7 @@ export const DynamicSection = ({
   onDelete,
   onEdit,
   sectionName,
+  creationDate,
   isPreview = false,
 }) => {
   const renderContent = () => {
@@ -39,7 +40,7 @@ export const DynamicSection = ({
             <div className="flex items-center gap-2 text-xs text-gray-500 mt-0.5">
               <div className="flex items-center gap-1">
                 <FaRegClock />
-                <span>Reciente</span>
+                <span>Publicado: {creationDate}</span>
               </div>
             </div>
           </div>

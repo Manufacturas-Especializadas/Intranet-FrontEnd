@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import { FaTimes, FaUserCircle, FaRegClock } from "react-icons/fa";
 
-export const PostDetailModal = ({ isOpen, onClose, post, sectionName }) => {
+export const PostDetailModal = ({
+  isOpen,
+  onClose,
+  post,
+  sectionName,
+  creationDate,
+}) => {
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "unset";
@@ -44,7 +50,7 @@ export const PostDetailModal = ({ isOpen, onClose, post, sectionName }) => {
               <div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
                 <div className="flex items-center gap-1">
                   <FaRegClock size={14} />
-                  <span>Reciente</span>
+                  <span>Publicado: {creationDate}</span>
                 </div>
               </div>
             </div>

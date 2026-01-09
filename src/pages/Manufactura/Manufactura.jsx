@@ -5,6 +5,7 @@ import { CreatePostWidget } from "../../components/DynamicComponents/CreatePostW
 import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
 import { DynamicSection } from "../../components/DynamicComponents/DynamicSection";
 import { PostDetailModal } from "../../components/DynamicComponents/PostDetailModal";
+import { dateFormats, formatDate } from "../../utils/dateFormatter";
 
 const Manufactura = () => {
   const {
@@ -42,37 +43,46 @@ const Manufactura = () => {
             </div>
           ) : (
             posts.map((post) => (
-              <div
-                key={post.id}
-                onClick={() => openPostDetail(post)}
-                className="transition-transform hover:scale-[1.005]"
-              >
-                <DynamicSection
-                  id={post.id}
-                  onDelete={(e) => {
-                    e.stopPropagation();
-                    deletePost(post.id);
-                  }}
-                  title={post.title}
-                  blogMedias={post.blogMedia}
-                  imageUrl={post.img}
-                  content={post.content}
-                  template={post.template}
-                  isPreview={true}
+              <>
+                <div
+                  key={post.id}
+                  onClick={() => openPostDetail(post)}
+                  className="transition-transform hover:scale-[1.005]"
+                >
+                  <DynamicSection
+                    id={post.id}
+                    onDelete={(e) => {
+                      e.stopPropagation();
+                      deletePost(post.id);
+                    }}
+                    title={post.title}
+                    blogMedias={post.blogMedia}
+                    imageUrl={post.img}
+                    content={post.content}
+                    template={post.template}
+                    isPreview={true}
+                    sectionName="Manufactura"
+                    creationDate={formatDate(
+                      post.createdAt,
+                      dateFormats.shortDate
+                    )}
+                  />
+                </div>
+                <PostDetailModal
+                  isOpen={isDetailOpen}
+                  onClose={closePostDetail}
+                  post={selectedPost}
                   sectionName="Manufactura"
+                  creationDate={formatDate(
+                    post.createdAt,
+                    dateFormats.shortDate
+                  )}
                 />
-              </div>
+              </>
             ))
           )}
         </div>
       </main>
-
-      <PostDetailModal
-        isOpen={isDetailOpen}
-        onClose={closePostDetail}
-        post={selectedPost}
-        sectionName="Manufactura"
-      />
     </>
   );
 };
