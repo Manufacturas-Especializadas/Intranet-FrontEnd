@@ -17,6 +17,10 @@ const Manufactura = () => {
     isDetailOpen,
     openPostDetail,
     closePostDetail,
+    editingPost,
+    startEditing,
+    cancelEditing,
+    handleUpdatePost,
   } = useBlogPosts("Manufactura");
 
   return (
@@ -27,6 +31,10 @@ const Manufactura = () => {
         <RoleGuard allowedRoles={["Admin", "Manufactura"]}>
           <CreatePostWidget
             onPostCreated={fetchPost}
+            onPostUpdated={handleUpdatePost}
+            onCancelEdit={cancelEditing}
+            postToEdit={editingPost}
+            isEditing={!!editingPost}
             sectionName="Manufactura"
           />
         </RoleGuard>
@@ -51,9 +59,11 @@ const Manufactura = () => {
                 >
                   <DynamicSection
                     id={post.id}
-                    onDelete={(e) => {
-                      e.stopPropagation();
+                    onDelete={() => {
                       deletePost(post.id);
+                    }}
+                    onEdit={() => {
+                      startEditing(post);
                     }}
                     title={post.title}
                     blogMedias={post.blogMedia}

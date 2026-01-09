@@ -17,6 +17,10 @@ const Calidad = () => {
     isDetailOpen,
     openPostDetail,
     closePostDetail,
+    editingPost,
+    startEditing,
+    cancelEditing,
+    handleUpdatePost,
   } = useBlogPosts("Calidad");
 
   return (
@@ -25,7 +29,14 @@ const Calidad = () => {
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         <RoleGuard allowedRoles={["Admin", "Calidad"]}>
-          <CreatePostWidget onPostCreated={fetchPost} sectionName="Calidad" />
+          <CreatePostWidget
+            onPostCreated={fetchPost}
+            onPostUpdated={handleUpdatePost}
+            onCancelEdit={cancelEditing}
+            postToEdit={editingPost}
+            isEditing={!!editingPost}
+            sectionName="Calidad"
+          />
         </RoleGuard>
 
         <div className="space-y-6">
@@ -48,9 +59,11 @@ const Calidad = () => {
                 >
                   <DynamicSection
                     id={post.id}
-                    onDelete={(e) => {
-                      e.stopPropagation();
+                    onDelete={() => {
                       deletePost(post.id);
+                    }}
+                    onEdit={() => {
+                      startEditing(post);
                     }}
                     title={post.title}
                     blogMedias={post.blogMedia}

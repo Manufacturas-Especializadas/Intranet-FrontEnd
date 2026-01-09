@@ -17,6 +17,10 @@ export const TI = () => {
     isDetailOpen,
     openPostDetail,
     closePostDetail,
+    editingPost,
+    startEditing,
+    cancelEditing,
+    handleUpdatePost,
   } = useBlogPosts("TI");
 
   return (
@@ -24,7 +28,14 @@ export const TI = () => {
       <Hero />
       <main className="max-w-4xl mx-auto px-4 py-8">
         <RoleGuard allowedRoles={["Admin", "TI"]}>
-          <CreatePostWidget onPostCreated={fetchPost} sectionName="TI" />
+          <CreatePostWidget
+            onPostCreated={fetchPost}
+            onPostUpdated={handleUpdatePost}
+            onCancelEdit={cancelEditing}
+            postToEdit={editingPost}
+            isEditing={!!editingPost}
+            sectionName="TI"
+          />
         </RoleGuard>
 
         <div className="space-y-6">
@@ -47,9 +58,11 @@ export const TI = () => {
                 >
                   <DynamicSection
                     id={post.id}
-                    onDelete={(e) => {
-                      e.stopPropagation();
+                    onDelete={() => {
                       deletePost(post.id);
+                    }}
+                    onEdit={() => {
+                      startEditing(post);
                     }}
                     title={post.title}
                     blogMedias={post.blogMedia}

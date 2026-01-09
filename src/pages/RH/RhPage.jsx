@@ -17,6 +17,10 @@ const RhPage = () => {
     isDetailOpen,
     openPostDetail,
     closePostDetail,
+    editingPost,
+    startEditing,
+    cancelEditing,
+    handleUpdatePost,
   } = useBlogPosts("Rh");
 
   return (
@@ -26,7 +30,14 @@ const RhPage = () => {
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         <RoleGuard allowedRoles={["Admin", "Rh"]}>
-          <CreatePostWidget onPostCreated={fetchPost} sectionName="Rh" />
+          <CreatePostWidget
+            onPostCreated={fetchPost}
+            onPostUpdated={handleUpdatePost}
+            onCancelEdit={cancelEditing}
+            postToEdit={editingPost}
+            isEditing={!!editingPost}
+            sectionName="Rh"
+          />
         </RoleGuard>
 
         <div className="space-y-6">
@@ -48,9 +59,11 @@ const RhPage = () => {
               >
                 <DynamicSection
                   id={post.id}
-                  onDelete={(e) => {
-                    e.stopPropagation();
+                  onDelete={() => {
                     deletePost(post.id);
+                  }}
+                  onEdit={() => {
+                    startEditing(post);
                   }}
                   title={post.title}
                   blogMedias={post.blogMedia}

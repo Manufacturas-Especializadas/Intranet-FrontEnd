@@ -17,6 +17,10 @@ const Seguridad = () => {
     isDetailOpen,
     openPostDetail,
     closePostDetail,
+    editingPost,
+    startEditing,
+    cancelEditing,
+    handleUpdatePost,
   } = useBlogPosts("Seguridad");
 
   return (
@@ -25,7 +29,14 @@ const Seguridad = () => {
 
       <main className="max-w-4xl mx-auto px-4 py-8">
         <RoleGuard allowedRoles={["Admin", "Seguridad"]}>
-          <CreatePostWidget onPostCreated={fetchPost} sectionName="Seguridad" />
+          <CreatePostWidget
+            onPostCreated={fetchPost}
+            onPostUpdated={handleUpdatePost}
+            onCancelEdit={cancelEditing}
+            postToEdit={editingPost}
+            isEditing={!!editingPost}
+            sectionName="Seguridad"
+          />
         </RoleGuard>
 
         <div className="space-y-6">
@@ -48,9 +59,11 @@ const Seguridad = () => {
                 >
                   <DynamicSection
                     id={post.id}
-                    onDelete={(e) => {
-                      e.stopPropagation();
+                    onDelete={() => {
                       deletePost(post.id);
+                    }}
+                    onEdit={() => {
+                      startEditing(post);
                     }}
                     title={post.title}
                     blogMedias={post.blogMedia}

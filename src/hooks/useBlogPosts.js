@@ -59,8 +59,6 @@ export const useBlogPosts = (sectionName) => {
 
   const startEditing = (post) => {
     setEditingPost(post);
-
-    window.scroll({ top: 0, behavior: "smooth" });
   };
 
   const cancelEditing = () => {
