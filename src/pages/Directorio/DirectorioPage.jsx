@@ -72,12 +72,19 @@ const DirectorioPage = () => {
 
   const seccionesFiltradas = secciones
     .map((seccion) => {
-      const datosFiltrados = seccion.data.filter(
-        (persona) =>
-          persona.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          persona.puesto.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          persona.ext?.toString().includes(searchTerm)
-      );
+      const datosFiltrados = seccion.data.filter((persona) => {
+        const nombre = persona.nombre?.toLowerCase() || "";
+        const puesto = persona.puesto?.toLowerCase() || "";
+        const extension = persona.ext?.toString() || "";
+
+        const termino = searchTerm.toLowerCase();
+
+        return (
+          nombre.includes(termino) ||
+          puesto.includes(termino) ||
+          extension.includes(termino)
+        );
+      });
       return { ...seccion, data: datosFiltrados };
     })
     .filter((seccion) => seccion.data.length > 0);
