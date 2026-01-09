@@ -69,6 +69,7 @@ export const TI = () => {
         isOpen={isDetailOpen}
         onClose={closePostDetail}
         post={selectedPost}
+        sectionName="TI"
       />
     </>
   );

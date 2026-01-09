@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { FaTimes, FaUserCircle, FaRegClock } from "react-icons/fa";
 
-export const PostDetailModal = ({ isOpen, onClose, post }) => {
+export const PostDetailModal = ({ isOpen, onClose, post, sectionName }) => {
   useEffect(() => {
     if (isOpen) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "unset";
@@ -39,7 +39,7 @@ export const PostDetailModal = ({ isOpen, onClose, post }) => {
             </div>
             <div>
               <h3 className="font-bold text-gray-900 text-lg leading-none">
-                Capacitación
+                {sectionName}
               </h3>
               <div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
                 <div className="flex items-center gap-1">

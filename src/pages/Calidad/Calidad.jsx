@@ -68,6 +68,7 @@ const Calidad = () => {
         isOpen={isDetailOpen}
         onClose={closePostDetail}
         post={selectedPost}
+        sectionName="Calidad"
       />
     </>
   );

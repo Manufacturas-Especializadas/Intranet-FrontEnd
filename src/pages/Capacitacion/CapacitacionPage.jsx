@@ -70,6 +70,7 @@ const CapacitacionPage = () => {
         isOpen={isDetailOpen}
         onClose={closePostDetail}
         post={selectedPost}
+        sectionName="Capacacitación"
       />
     </>
   );

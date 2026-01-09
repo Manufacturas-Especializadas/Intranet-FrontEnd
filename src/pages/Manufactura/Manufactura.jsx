@@ -59,6 +59,7 @@ const Manufactura = () => {
                   content={post.content}
                   template={post.template}
                   isPreview={true}
+                  sectionName="Manufactura"
                 />
               </div>
             ))
@@ -70,6 +71,7 @@ const Manufactura = () => {
         isOpen={isDetailOpen}
         onClose={closePostDetail}
         post={selectedPost}
+        sectionName="Manufactura"
       />
     </>
   );

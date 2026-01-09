@@ -68,6 +68,7 @@ const Seguridad = () => {
         isOpen={isDetailOpen}
         onClose={closePostDetail}
         post={selectedPost}
+        sectionName="Seguridad"
       />
     </>
   );

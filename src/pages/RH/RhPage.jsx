@@ -70,6 +70,7 @@ const RhPage = () => {
         isOpen={isDetailOpen}
         onClose={closePostDetail}
         post={selectedPost}
+        sectionName="Recursos Humanos"
       />
     </>
   );
