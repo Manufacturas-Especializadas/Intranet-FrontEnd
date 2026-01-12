@@ -9,6 +9,9 @@ const blogContentService = {
       }?pageType=${encodeURIComponent(pageType)}`
     );
   },
+  blogContentAll: () => {
+    return httpClient.get(API_ENDPOINTS.BLOGCONTENT.GETALLBLOGCONTENT);
+  },
   blogContenById: (id, pageType) => {
     return httpClient.get(
       `${
