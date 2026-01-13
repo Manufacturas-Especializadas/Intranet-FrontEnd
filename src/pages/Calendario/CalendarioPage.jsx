@@ -64,7 +64,7 @@ const CustomToolbar = ({ label, onNavigate, onView, view }) => {
       </h2>
 
       <div className="flex bg-white p-1 rounded-lg shadow-sm border border-gray-200">
-        {["month", "week", "day", "agenda"].map((v) => (
+        {["month", "week"].map((v) => (
           <button
             key={v}
             onClick={() => onView(v)}
@@ -74,13 +74,7 @@ const CustomToolbar = ({ label, onNavigate, onView, view }) => {
                 : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
             }`}
           >
-            {v === "month"
-              ? "Mes"
-              : v === "week"
-              ? "Semana"
-              : v === "day"
-              ? "Día"
-              : "Agenda"}
+            {v === "month" ? "Mes" : v === "week" ? "Semana" : " "}
           </button>
         ))}
       </div>
