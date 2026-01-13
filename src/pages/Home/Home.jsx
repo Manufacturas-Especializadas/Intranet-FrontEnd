@@ -14,7 +14,7 @@ const Home = () => {
       <EnlacesRapidos />
       <Valores />
       <Calendario />
-      <EquipoDestacado />
+      {/* <EquipoDestacado /> */}
       <Footer />
     </>
   );
