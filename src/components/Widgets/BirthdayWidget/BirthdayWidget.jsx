@@ -51,13 +51,11 @@ export const BirthdayWidget = ({ employees = [] }) => {
             key={emp.id}
             className="p-4 flex items-center gap-3 hover:bg-pink-50 transition-colors"
           >
-            {/* CORRECCIÓN VISUAL: Avatar con inicial */}
             <div className="shrink-0 w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold text-lg shadow-sm border border-pink-200">
               {emp.name.charAt(0)}
             </div>
 
             <div className="min-w-0 flex-1">
-              {/* CORRECCIÓN VISUAL: Truncate para nombres largos */}
               <p
                 className="text-gray-800 font-semibold text-sm truncate"
                 title={emp.name}

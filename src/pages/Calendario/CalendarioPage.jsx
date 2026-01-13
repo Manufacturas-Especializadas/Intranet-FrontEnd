@@ -132,20 +132,17 @@ const CalendarioPage = () => {
       </section>
 
       <style>{`
-        /* FUENTE GENERAL */
         .rbc-calendar {
             font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
             color: #374151;
         }
 
-        /* QUITAMOS BORDES DE LA TABLA PRINCIPAL */
         .rbc-month-view {
             border: 1px solid #e5e7eb !important;
             border-radius: 12px;
             overflow: hidden;
         }
         
-        /* HEADER (LUN, MAR, MIE...) */
         .rbc-header {
             padding: 12px 0 !important;
             font-weight: 700 !important;
@@ -156,7 +153,6 @@ const CalendarioPage = () => {
             letter-spacing: 0.05em;
         }
 
-        /* CELDAS Y LÍNEAS */
         .rbc-month-row + .rbc-month-row {
             border-top: 1px solid #e5e7eb !important;
         }
@@ -164,17 +160,14 @@ const CalendarioPage = () => {
             border-left: 1px solid #e5e7eb !important;
         }
         
-        /* DÍA ACTUAL */
         .rbc-today {
             background-color: #eff6ff !important; /* blue-50 */
         }
         
-        /* DÍAS FUERA DEL MES */
         .rbc-off-range-bg {
             background-color: #fcfcfc !important;
         }
 
-        /* --- ESTILOS DEL POPUP (VER MÁS) --- */
         .rbc-overlay {
             background-color: white !important;
             border-radius: 8px !important;
@@ -192,7 +185,6 @@ const CalendarioPage = () => {
             font-size: 0.9rem;
         }
 
-        /* BOTÓN "+ Ver más" */
         .rbc-show-more {
             background-color: transparent !important;
             color: #2563eb !important; /* blue-600 */
@@ -204,7 +196,6 @@ const CalendarioPage = () => {
             text-decoration: underline !important;
         }
 
-        /* EVENTOS */
         .rbc-event {
             padding: 2px 4px !important;
         }
@@ -212,7 +203,6 @@ const CalendarioPage = () => {
             outline: none !important;
         }
 
-        /* VISTA AGENDA */
         .rbc-agenda-view table.rbc-agenda-table {
             border: none !important;
         }
