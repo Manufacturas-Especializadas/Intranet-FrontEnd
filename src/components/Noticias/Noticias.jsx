@@ -51,7 +51,7 @@ const Noticias = () => {
                 <div className="h-40 bg-gray-200 rounded-xl"></div>
               </div>
             ) : posts && posts.length > 0 ? (
-              posts.map((post) => {
+              posts.slice(0, 3).map((post) => {
                 const mediaList = post.blogMedia || [];
                 const coverImage =
                   mediaList.find((m) => m.mediaType === "image")?.url ||
