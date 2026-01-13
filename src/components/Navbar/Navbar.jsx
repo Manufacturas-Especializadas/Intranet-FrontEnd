@@ -144,9 +144,9 @@ const Navbar = () => {
             )}
             {isAuthenticated ? (
               <>
-                <NavLink
+                {/* <NavLink
                   item={{ text: "Perfil", path: "/perfil", icon: FaUser }}
-                />
+                /> */}
                 <button
                   onClick={logout}
                   className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-white 
@@ -245,10 +245,10 @@ const Navbar = () => {
 
               {isAuthenticated ? (
                 <>
-                  <NavLink
+                  {/* <NavLink
                     item={{ text: "Perfil", path: "/perfil", icon: FaUser }}
                     isMobile={true}
-                  />
+                  /> */}
                   <button
                     onClick={() => {
                       logout();
